@@ -2,6 +2,8 @@
 #include "kana.hpp"
 #include <time.h>
 
+#define NB_KANA 42
+
 int main()
 {
 	int t(0);
@@ -10,7 +12,7 @@ int main()
 std::cout << "hello wolrd";
 	dic.afficher_tab();
 	std::cout << "helloあいうえwolrdお" << std::endl;
-	t=rand()%dic.get_hirag().size();
-	std::cout << u8"Hiragana aléatoire : ";  std::cout << "あいうえお" << std::endl;dic.afficher_tab(0);
+	t=(rand()%NB_KANA)*3;
+	std::cout << u8"Hiragana aléatoire : " << t;  std::cout << "あいうえお" << std::endl;dic.afficher_tab(t);
 	return 0;
 }

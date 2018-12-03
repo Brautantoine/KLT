@@ -4,8 +4,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include <locale.h>
-#include <stdio.h>
+#include <time.h>
 
 using std::string;
 
@@ -18,16 +17,25 @@ class kana_dic
 
 	void afficher_tab();
 	void afficher_tab(int index);
+	void print_romaj(int index);
+	void print_current();
+	void print_current_romaj();
+	bool compare_kana(string input);
+	void draw_kana();
+
+	static const int NB_KANA;
 
 	private :
 
 	void init_tab();
 	
 	string hirag_tab;
-	std::vector<char> katak_tab;
-	std::vector<char> romaj_tab;
+	//string katak_tab; Not implemented yet
+	std::vector<string> romaj_tab;
+	int current_kana;
 
 };
+
 
 
 #endif // KANA_HPP

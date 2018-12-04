@@ -1,30 +1,21 @@
-#include <iostream>
-#include "kana.hpp"
-#include <time.h>
-#include <unistd.h>
 #include "klt_core.hpp"
 
-//#define NB_KANA 42
-
-int main()
+klt_core::klt_core()
 {
-	//bool core(true);
-	//int inp(0);
-	klt_core main_loop;
-	/**char c(0);**/
-	/**bool invalid_choice(false);**/
+	core=true;
+	inp=0;
+	invalid_choice=false;
+	c=0;
+}
 
-	//kana_dic dic;
-	/*int t(0);
-	srand(time(NULL));
-	
-std::cout << "hello wolrd";*/
-	//dic.afficher_tab();
-	/*std::cout << "helloあいうえwolrdお" << std::endl;
-	t=(rand()%NB_KANA)*3;
-	std::cout << u8"Hiragana aléatoire : " << t;  std::cout << "あいうえお" << std::endl;dic.afficher_tab(t);*/
-	main_loop.start_loop();
-	/*while(core)
+klt_core::~klt_core()
+{
+
+}
+
+int klt_core::start_loop()
+{
+	while(core)
 	{
 		
 		system("clear");
@@ -64,7 +55,7 @@ std::cout << "hello wolrd";*/
 			default :
 				invalid_choice=true;			
 		}
-	}*/
+	}
 
 	return 0;
 }

@@ -15,12 +15,12 @@ class klt_core
 	private:
 
 	void print_table();
+	void start_random_kana();
 	
 	bool core;
 	int inp;
 	kana_dic dic;
-	int invalid_choice;
-	char c;
+	bool invalid_choice;
 };
 
 #endif //KLT_CORE

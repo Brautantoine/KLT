@@ -48,7 +48,7 @@ void klt_core::print_table()
 	char c(0);
 	invalid_choice=false;
 	system("clear");
-	dic.afficher_tab();
+	dic.print_tab();
 	std::cout << std::endl <<  "Enter q to quit";
 	while(c!='q')std::cin.get(c);
 }
@@ -57,12 +57,23 @@ void klt_core::start_random_kana()
 {
 	bool core2(true);
 	string input; // String and using string declare in kana.hpp
+	int nb_row(10);
+
+	system("clear");
+
+	std::cout<<"How many row do you want ? : ";
+
+	std::cin>>nb_row;
+
+	if(nb_row<=0 || nb_row>10)
+		nb_row=10;
 
 	while(core2)
 	{
 		system("clear");
 
-		dic.draw_kana();
+		dic.draw_kana(nb_row);
+		dic.print_tab(nb_row);
 		std::cout << "Wich Romaji correspond to the kana ";
 		dic.print_current();
 		std::cout << " : ";

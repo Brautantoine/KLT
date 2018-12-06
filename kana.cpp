@@ -28,7 +28,7 @@ void kana_dic::init_tab()
 					  "ya",     "yu",     "yo",
 					  "ra","ri","ru","re","ro",
 					  "wa",               "wo"});*/
-	emplace_romaj_tab();	// We could have used list initialisation as below 
+	emplace_romaj_tab();	// We could have used list initialisation as below
 				// but presence of 2 std::vector<string> initialised like this lead to seg fault when deallocating
 	hirag_tab_format = std::vector<string> ({"a   i   u   e   o\n","あ  い  う  え  お\n","ka  ki  ku  ke  ko\n","か  き  く  け  こ\n","sa  shi su  se  so\n","さ  し  す  せ  そ\n","ta  chi tsu te  to\n","た  ち  つ  て  と\n","na  ni  nu  ne  no\n","な  に  ぬ  ね  の\n","ha  hi  fu  he  ho\n","は  ひ  ふ  へ  ほ\n","ma  mi  mu  me  mo\n","ま  み  む  め  も \n","ya      yu      yo\n","や      ゆ      よ\n","ra  ri  ru  re  ro\n","ら  り  る  れ  ろ\n","wa              wo\n","わ              を"});
 }
@@ -47,32 +47,33 @@ void kana_dic::print_tab(int row)
 }
 
 void kana_dic::print_kana(int index)
-{ 
+{
  	for (int i = index; i<index+3;i++) std::cout << hirag_tab.at(i);
 }
 
 void kana_dic::print_romaj(int index)
-{ 
+{
 	 std::cout << romaj_tab.at(index);
 }
 
 void kana_dic::print_current()
-{ 
- 	for (int i = current_kana; i<current_kana+3;i++) 
+{
+ 	for (int i = current_kana; i<current_kana+3;i++)
 		std::cout << hirag_tab.at(i);
 }
 
 void kana_dic::print_current_romaj()
-{ 
+{
 	 std::cout << romaj_tab.at(current_kana/3);
 }
 
 void kana_dic::draw_kana(int nb_row)
 {
+	static int last_kana(-1);
 	int nb_active_kana(0);
 	if(nb_row<=0 || nb_row>10)
 		nb_row=10;
-	switch(nb_row)	
+	switch(nb_row)
 	{
 		case 8 :
 			nb_active_kana=NB_KANA-7;
@@ -87,19 +88,22 @@ void kana_dic::draw_kana(int nb_row)
 			nb_active_kana=nb_row*5;
 	}
 	//std::cerr << nb_active_kana;
-	current_kana=(rand()%nb_active_kana)*3;
+	do {
+		current_kana=(rand()%nb_active_kana)*3;
+	} while(current_kana==last_kana);
+	last_kana=current_kana;
 }
 
 bool kana_dic::compare_kana(string input)
 {
 	for(string::iterator it=input.begin(); it!=input.end();it++)
 		*it=(char)::tolower(*it);
-	if (romaj_tab.at(current_kana/3).compare(input)) 
+	if (romaj_tab.at(current_kana/3).compare(input))
 		return false;
 	else return true;
 }
 
-void kana_dic::emplace_romaj_tab() // 
+void kana_dic::emplace_romaj_tab() //
 {
 	std::vector<string> tmp ({"a","i","u","e","o",
 				  "ka","ki","ku","ke","ko",

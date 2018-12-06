@@ -1,3 +1,24 @@
+/****************************************************************************************
+*    KLT : A terminal tool that help you learn kana                                     *
+*    Copyright KLT (C) 2018  Antoine Braut                                              *
+*                                                                                       *
+*    This program is free software: you can redistribute it and/or modify               *
+*    it under the terms of the GNU General Public License as published by               *
+*    the Free Software Foundation, either version 3 of the License, or                  *
+*    (at your option) any later version.                                                *
+*                                                                                       *
+*    This program is distributed in the hope that it will be useful,                    *
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of                     *
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                      *
+*    GNU General Public License for more details.                                       *
+*                                                                                       *
+*    You should have received a copy of the GNU General Public License                  *
+*    along with this program. If not, see <https://www.gnu.org/licenses/>.              *
+*                                                                                       *
+*    Contact : Antoine.braut@gmail.com                                                  *
+*                                                                                       *
+****************************************************************************************/
+
 #include "klt_core.hpp"
 
 klt_core::klt_core()
@@ -19,7 +40,7 @@ int klt_core::start_loop()
 		system("clear");
 		std::cout << "\n\t\tWelcome to KLT\n\n\t1 - Go for some random kana\n\t2 - Show Kana Table\n\t3 - Quit and come back later\n\n\tYour choice : " ;
 		if(invalid_choice)
-			std::cout << "[Your choice is in another castle] : ";  
+			std::cout << "[Your choice is in another castle] : ";
 
 		std::cin.sync();
 		std::cin >> inp;
@@ -36,7 +57,7 @@ int klt_core::start_loop()
 				core=false;
 				break;
 			default :
-				invalid_choice=true;			
+				invalid_choice=true;
 		}
 	}
 
@@ -79,14 +100,14 @@ void klt_core::start_random_kana()
 		std::cout << " : ";
 
 		std::cin >> input;
-		
-		if(dic.compare_kana(input)) 
+
+		if(dic.compare_kana(input))
 		{
 			std::cout<<std::endl<<"Correct ";
 			dic.print_current();std::cout << " -> ";
 			dic.print_current_romaj();std::cout << " !" << std::endl;
 		}
-		else 
+		else
 		{
 			std::cout<<std::endl<<"Wrong ";
 			dic.print_current();
@@ -100,5 +121,5 @@ void klt_core::start_random_kana()
 
 		if (input == "N" || input == "n")
 			core2=false;
-	}	
+	}
 }

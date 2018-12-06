@@ -1,4 +1,4 @@
-# What is Kana Learning Tool (Work In Progresse) ? ##
+# What is Kana Learning Tool (Work In Progress) ? ##
 >**This software is under development, core program isn't finish yet. You can try it if you want but some features will come later**
 
 KLT (Kana Learning Tool) is a terminal programm that will help you learn and practice your kana. Currently KLT has only small features such as :

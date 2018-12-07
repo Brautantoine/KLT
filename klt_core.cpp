@@ -54,6 +54,8 @@ int klt_core::start_loop()
 		{
 			mvprintw(0,4,"%s",menu_string.at(0).c_str());
 			refresh();
+			nc_print_menu(menu_win, highlight);
+			choice=0;
 		}
 
 		//system("clear"); //before ncurses
@@ -105,12 +107,15 @@ int klt_core::start_loop()
 
 void klt_core::print_table()
 {
-	char c(0);
-	invalid_choice=false;
-	system("clear");
+	//char c(0);
+	//invalid_choice=false;
+	//system("clear");
+	clear();
 	dic.print_tab();
-	std::cout << std::endl <<  "Enter q to quit";
-	while(c!='q')std::cin.get(c);
+	//std::cout << std::endl <<  "Enter q to quit";
+	while(getch()!='q');
+	clear();
+	choice=-1;
 }
 
 void klt_core::start_random_kana()

@@ -56,6 +56,7 @@ void kana_dic::init_tab()
 
 void kana_dic::print_tab(int row)
 {
+	int i=0;
 	if (row<=0 || row > hirag_tab_format.size())
 		row=hirag_tab_format.size();
 	//setlocale(LC_ALL, "ja_JP.UTF8");
@@ -63,8 +64,11 @@ void kana_dic::print_tab(int row)
 	for (int i = 0; i<hirag_tab.size();i++) std::cout << hirag_tab.at(i);
 	std::cout << std::endl;*/
 	/*std::cout << "a   i   u   e   o\nあ  い  う  え  お\nka  ki  ku  ke  ko\nか  き  く  け  こ\nsa  shi su  se  so\nさ  し  す  せ  そ\nta  chi tsu te  to\nた  ち  つ  て  と\nna  ni  nu  ne  no\nな  に  ぬ  ね  の\nha  hi  fu  he  ho\nは  ひ  ふ  へ  ほ\nma  mi  mu  me  mo\nま  み  む  め  も \nya      yu      yo\nや      ゆ      よ\nra  ri  ru  re  ro\nら  り  る  れ  ろ\nwa              wo\nわ              を" << std::endl;*/
-	for(int i=0;i<row*2;i++)
-		std::cout << hirag_tab_format.at(i);
+	for(i=0;i<row*2;i++)
+		//std::cout << hirag_tab_format.at(i);
+		mvprintw(i,0,"%s",hirag_tab_format.at(i).c_str());
+	mvprintw(i,0,"Press q to quit");
+	refresh();
 }
 
 void kana_dic::print_kana(int index)

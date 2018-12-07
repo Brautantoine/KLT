@@ -26,6 +26,7 @@
 #include <string>
 #include <iostream>
 #include <time.h>
+#include <ncurses.h>
 
 using std::string;
 

@@ -29,11 +29,10 @@ Run the program without any arg to launch the core program.\n\
       Usage :   klt [Arg]\
 \n\
                 -h | --help     : show this message\n\
-                -v | --version  : show version and license\n\n";
+                -v | --version  : show version\n\n";
 }
 
 void utils::show_version()
 {
-  std::cout << "Kana Learning Tool - version 0.4 (beta-ncurses)\n\
-Copyright Kana Learning Tool (KLT) (c) 2018 Antoine Braut" << '\n';
+  std::cout << "Kana Learning Tool - version 0.4 (beta-ncurses)\n";
 }

@@ -110,6 +110,7 @@ void klt_core::print_table()
 	clear();
 
 	dic.print_tab();
+	dic.print_kat();
 	mvprintw(22,0,"Press q to quit");
 	refresh();
 

@@ -26,23 +26,46 @@
 #include "klt_core.hpp"
 #include <ncurses.h>
 #include <locale.h>
+#include "utils.hpp"
 
 
 
-int main()
+int main(int argc, char **argv)
 {
+	if(argc==1)
+	{
+		klt_core main_loop;
 
-	klt_core main_loop;
+		setlocale(LC_ALL, "");
+		initscr();
+		clear();
+		noecho();
+		cbreak();
+		main_loop.start_loop();
 
-	setlocale(LC_ALL, "");
-	initscr();
-	clear();
-	noecho();
-	cbreak();
-	main_loop.start_loop();
+		clrtoeol();
+		refresh();
+		endwin();
+	}
+	else
+	{
+		for(int i=1;i<argc;i++)
+		{
+				switch (utils::arg_hash(argv[i]))
+				{
+					case 1:
+						utils::show_help();
+						return 0;
+						break;
+					case 2:
+						utils::show_version();
+						return 0;
+						break;
+					default:
+						std::cout << "unknwow argument : " << argv[i] << std::endl;
+				}
+		}
+	}
 
-	clrtoeol();
-	refresh();
-	endwin();
 	return 0;
 }

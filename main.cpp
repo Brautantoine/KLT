@@ -24,7 +24,8 @@
 #include <time.h>
 #include <unistd.h>
 #include "klt_core.hpp"
-//#include <ncurses.h>
+#include <ncurses.h>
+#include <locale.h>
 
 //#define NB_KANA 42
 
@@ -33,15 +34,15 @@ int main()
 
 	klt_core main_loop;
 
-	//initscr();
+	setlocale(LC_ALL, "");
+	initscr();
+	clear();
+	noecho();
+	cbreak();
 	main_loop.start_loop();
 
-	/*printw("je suis la fenetre ncurses ... eh oui");
-	getch();
-	clear();
-	std::cout << " et je marche avec un cout" << '\n';
-	getch();
-	clear();
-	endwin();*/
+	clrtoeol();
+	refresh();
+	endwin();
 	return 0;
 }

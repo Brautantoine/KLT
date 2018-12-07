@@ -26,6 +26,13 @@ klt_core::klt_core()
 	core=true;
 	inp=0;
 	invalid_choice=false;
+
+	menu_string = std::vector<string> ({"Welcome to KLTあfeいうえおか",
+																			"1 - Go for some random kana",
+																			"2 - Show Kana Table",
+																			"3 - Quit and come back later"});
+	highlight=1;
+	choice=0;
 }
 
 klt_core::~klt_core()
@@ -35,17 +42,48 @@ klt_core::~klt_core()
 
 int klt_core::start_loop()
 {
+	menu_win = newwin(7,35,5,10);
+	int c;
+	keypad(menu_win, TRUE);
+	mvprintw(0,4,"%s",menu_string.at(0).c_str());
+	refresh();
+	nc_print_menu(menu_win, highlight);
 	while(core)
 	{
-		system("clear");
-		std::cout << "\n\t\tWelcome to KLT\n\n\t1 - Go for some random kana\n\t2 - Show Kana Table\n\t3 - Quit and come back later\n\n\tYour choice : " ;
-		if(invalid_choice)
-			std::cout << "[Your choice is in another castle] : ";
+		if(choice)
+		{
+			mvprintw(0,4,"%s",menu_string.at(0).c_str());
+			refresh();
+		}
 
-		std::cin.sync();
-		std::cin >> inp;
+		//system("clear"); //before ncurses
+		//clear(); // after ncurses
+		//std::cout << "\n\t\tWelcome to KLT\n\n\t1 - Go for some random kana\n\t2 - Show Kana Table\n\t3 - Quit and come back later\n\n\tYour choice : " ; //before ncurses
+		/*if(invalid_choice)
+			std::cout << "[Your choice is in another castle] : ";*/
 
-		switch(inp)
+		/*std::cin.sync();
+		std::cin >> inp;*/
+		c = wgetch(menu_win);
+		switch (c)
+		{
+			case KEY_UP:
+					if(highlight == 1)
+						highlight = menu_string.size()-1;
+					else
+						--highlight;
+					break;
+				case KEY_DOWN:
+					if(highlight == menu_string.size()-1)
+						highlight = 1;
+					else
+						++highlight;
+					break;
+				case 10:
+					choice = highlight;
+					break;
+		}
+		switch(choice)
 		{
 			case 1 :
 				start_random_kana();
@@ -56,11 +94,12 @@ int klt_core::start_loop()
 			case 3 :
 				core=false;
 				break;
-			default :
-				invalid_choice=true;
+		/*	default :
+				invalid_choice=true; */
 		}
+		nc_print_menu(menu_win, highlight);
 	}
-
+	//clear();
 	return 0;
 }
 
@@ -122,4 +161,23 @@ void klt_core::start_random_kana()
 		if (input == "N" || input == "n")
 			core2=false;
 	}
+}
+
+void klt_core::nc_print_menu(WINDOW *menu_win,int highlight)
+{
+	int y (2);
+	box(menu_win,0,0);
+	for (int i=0; i < menu_string.size()-1 ;i++)
+	{
+		if (highlight == i+1)
+		{
+			wattron(menu_win, A_REVERSE);
+			mvwprintw(menu_win,y,2,"%s",menu_string.at(i+1).c_str());
+			wattroff(menu_win, A_REVERSE);
+		}
+		else
+			mvwprintw(menu_win,y,2,"%s",menu_string.at(i+1).c_str());
+		y++;
+	}
+	wrefresh(menu_win);
 }

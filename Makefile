@@ -8,7 +8,7 @@ kana.o : kana.cpp
 
 all : main.cpp kana.o klt_core.o
 
-	 g++ main.cpp -o klt.out kana.o klt_core.o -std=c++11 -lncurses
+	 g++ main.cpp -o klt.out kana.o klt_core.o -std=c++11 -lncursesw
 
 install : klt.out
 

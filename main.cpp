@@ -27,7 +27,7 @@
 #include <ncurses.h>
 #include <locale.h>
 
-//#define NB_KANA 42
+
 
 int main()
 {

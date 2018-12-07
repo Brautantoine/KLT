@@ -44,29 +44,29 @@ int klt_core::start_loop()
 {
 	menu_win = newwin(7,35,5,10);
 	int c;
+
 	keypad(menu_win, TRUE);
+
 	mvprintw(0,4,"%s",menu_string.at(0).c_str());
 	refresh();
+
 	nc_print_menu(menu_win, highlight);
+
 	while(core)
 	{
 		if(choice)
 		{
 			mvprintw(0,4,"%s",menu_string.at(0).c_str());
 			refresh();
+
 			nc_print_menu(menu_win, highlight);
+
 			choice=0;
 		}
 
-		//system("clear"); //before ncurses
-		//clear(); // after ncurses
-		//std::cout << "\n\t\tWelcome to KLT\n\n\t1 - Go for some random kana\n\t2 - Show Kana Table\n\t3 - Quit and come back later\n\n\tYour choice : " ; //before ncurses
-		/*if(invalid_choice)
-			std::cout << "[Your choice is in another castle] : ";*/
 
-		/*std::cin.sync();
-		std::cin >> inp;*/
 		c = wgetch(menu_win);
+
 		switch (c)
 		{
 			case KEY_UP:
@@ -85,6 +85,7 @@ int klt_core::start_loop()
 					choice = highlight;
 					break;
 		}
+
 		switch(choice)
 		{
 			case 1 :
@@ -96,114 +97,103 @@ int klt_core::start_loop()
 			case 3 :
 				core=false;
 				break;
-		/*	default :
-				invalid_choice=true; */
 		}
+
 		nc_print_menu(menu_win, highlight);
 	}
-	//clear();
+
 	return 0;
 }
 
 void klt_core::print_table()
 {
-	//char c(0);
-	//invalid_choice=false;
-	//system("clear");
 	clear();
+
 	dic.print_tab();
-	//std::cout << std::endl <<  "Enter q to quit";
 	mvprintw(22,0,"Press q to quit");
 	refresh();
+
 	while(getch()!='q');
+
 	clear();
 	choice=-1;
 }
 
 void klt_core::start_random_kana()
 {
-	//bool core2(true);
-	string input; // String and using string declare in kana.hpp
-	char  temp[10];
+	string input; 																																// String and using string declare in kana.hpp
+	char  temp[10]; 																															// buffer for ncurses input
 	int nb_row(10);
 
-	//system("clear");
 	clear();
 
-	//std::cout<<"How many row do you want ? : ";
 	mvprintw(0,0,"How many row do you want ? : ");
 	refresh();
 
-	//std::cin>>nb_row;
 	nocbreak();
 	echo();
 	getstr(temp);
-	nb_row = std::stoi(temp);
 
+	nb_row = std::stoi(temp);
 	if(nb_row<=0 || nb_row>10)
 		nb_row=10;
 
 	while(1)
 	{
-		//system("clear");
 		clear();
 
 		dic.draw_kana(nb_row);
+
 		dic.print_tab(nb_row);
-		//std::cout << "Wich Romaji correspond to the kana ";
+
 		mvprintw(2,25,"Wich Romaji correspond to the kana ");
 		dic.print_current();
-		//std::cout << " : ";
 		printw(" : ");
 		refresh();
-		//std::cin >> input;
+
 		getstr(temp);
 		input = temp;
 
 		if(dic.compare_kana(input))
 		{
-			//std::cout<<std::endl<<"Correct ";
 			mvprintw(4,25,"Correct ");
 			dic.print_current();
-			//std::cout << " -> ";
 			printw(" -> ");
 			dic.print_current_romaj();
-			//std::cout << " !" << std::endl;
 			printw(" !");
 			refresh();
 		}
 		else
 		{
-			//std::cout<<std::endl<<"Wrong ";
 			mvprintw(4,25,"Wrong  ");
 			dic.print_current();
-			//std::cout << " -> ";
 			printw(" -> ");
 			dic.print_current_romaj();
-			//std::cout << " !" << std::endl;
 			printw(" !");
 			refresh();
 		}
-		//std::cout << "Continue ? (Y/N) : ";
+
 		cbreak();
 		noecho();
+
 		mvprintw(6,25,"Continue ? (Y/N)");
 		refresh();
 
-		//std::cin >> input;
 		input = getch();
 
 		if (input == "N" || input == "n")
-			break;
+			break;																																		// Don't like it but ... currently too lazy
+
 		nocbreak();
 		echo();
 	}
+
 	clear();
 	choice=-1;
 }
 
-void klt_core::nc_print_menu(WINDOW *menu_win,int highlight)
-{
+void klt_core::nc_print_menu(WINDOW *menu_win,int highlight)										// From the ncurses programmins howto
+{																																								// http://tldp.org/HOWTO/NCURSES-Programming-HOWTO/keys.html
 	int y (2);
 	box(menu_win,0,0);
 	for (int i=0; i < menu_string.size()-1 ;i++)

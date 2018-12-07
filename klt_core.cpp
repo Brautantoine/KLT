@@ -27,7 +27,7 @@ klt_core::klt_core()
 	inp=0;
 	invalid_choice=false;
 
-	menu_string = std::vector<string> ({"Welcome to KLTあfeいうえおか",
+	menu_string = std::vector<string> ({"Welcome in Kana Learning Tool - ようこそ",
 																			"1 - Go for some random kana",
 																			"2 - Show Kana Table",
 																			"3 - Quit and come back later"});
@@ -113,6 +113,8 @@ void klt_core::print_table()
 	clear();
 	dic.print_tab();
 	//std::cout << std::endl <<  "Enter q to quit";
+	mvprintw(22,0,"Press q to quit");
+	refresh();
 	while(getch()!='q');
 	clear();
 	choice=-1;
@@ -120,52 +122,84 @@ void klt_core::print_table()
 
 void klt_core::start_random_kana()
 {
-	bool core2(true);
+	//bool core2(true);
 	string input; // String and using string declare in kana.hpp
+	char  temp[10];
 	int nb_row(10);
 
-	system("clear");
+	//system("clear");
+	clear();
 
-	std::cout<<"How many row do you want ? : ";
+	//std::cout<<"How many row do you want ? : ";
+	mvprintw(0,0,"How many row do you want ? : ");
+	refresh();
 
-	std::cin>>nb_row;
+	//std::cin>>nb_row;
+	nocbreak();
+	echo();
+	getstr(temp);
+	nb_row = std::stoi(temp);
 
 	if(nb_row<=0 || nb_row>10)
 		nb_row=10;
 
-	while(core2)
+	while(1)
 	{
-		system("clear");
+		//system("clear");
+		clear();
 
 		dic.draw_kana(nb_row);
 		dic.print_tab(nb_row);
-		std::cout << "Wich Romaji correspond to the kana ";
+		//std::cout << "Wich Romaji correspond to the kana ";
+		mvprintw(2,25,"Wich Romaji correspond to the kana ");
 		dic.print_current();
-		std::cout << " : ";
-
-		std::cin >> input;
+		//std::cout << " : ";
+		printw(" : ");
+		refresh();
+		//std::cin >> input;
+		getstr(temp);
+		input = temp;
 
 		if(dic.compare_kana(input))
 		{
-			std::cout<<std::endl<<"Correct ";
-			dic.print_current();std::cout << " -> ";
-			dic.print_current_romaj();std::cout << " !" << std::endl;
+			//std::cout<<std::endl<<"Correct ";
+			mvprintw(4,25,"Correct ");
+			dic.print_current();
+			//std::cout << " -> ";
+			printw(" -> ");
+			dic.print_current_romaj();
+			//std::cout << " !" << std::endl;
+			printw(" !");
+			refresh();
 		}
 		else
 		{
-			std::cout<<std::endl<<"Wrong ";
+			//std::cout<<std::endl<<"Wrong ";
+			mvprintw(4,25,"Wrong  ");
 			dic.print_current();
-			std::cout << " -> ";
+			//std::cout << " -> ";
+			printw(" -> ");
 			dic.print_current_romaj();
-			std::cout << " !" << std::endl;
+			//std::cout << " !" << std::endl;
+			printw(" !");
+			refresh();
 		}
-		std::cout << "Continue ? (Y/N) : ";
+		//std::cout << "Continue ? (Y/N) : ";
+		cbreak();
+		noecho();
+		mvprintw(6,25,"Continue ? (Y/N)");
+		refresh();
 
-		std::cin >> input;
+		//std::cin >> input;
+		input = getch();
 
 		if (input == "N" || input == "n")
-			core2=false;
+			break;
+		nocbreak();
+		echo();
 	}
+	clear();
+	choice=-1;
 }
 
 void klt_core::nc_print_menu(WINDOW *menu_win,int highlight)

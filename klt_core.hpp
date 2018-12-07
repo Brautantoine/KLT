@@ -26,6 +26,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <ncurses.h>
+#include <cstdlib>
 
 class klt_core
 {

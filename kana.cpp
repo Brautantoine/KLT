@@ -67,7 +67,7 @@ void kana_dic::print_tab(int row)
 	for(i=0;i<row*2;i++)
 		//std::cout << hirag_tab_format.at(i);
 		mvprintw(i,0,"%s",hirag_tab_format.at(i).c_str());
-	mvprintw(i,0,"Press q to quit");
+	//mvprintw(i,0,"Press q to quit");
 	refresh();
 }
 
@@ -84,12 +84,14 @@ void kana_dic::print_romaj(int index)
 void kana_dic::print_current()
 {
  	for (int i = current_kana; i<current_kana+3;i++)
-		std::cout << hirag_tab.at(i);
+		printw("%c",hirag_tab.at(i));
+		//std::cout << hirag_tab.at(i);
 }
 
 void kana_dic::print_current_romaj()
 {
-	 std::cout << romaj_tab.at(current_kana/3);
+	 //std::cout << romaj_tab.at(current_kana/3);
+	 printw("%s",romaj_tab.at(current_kana/3).c_str());
 }
 
 void kana_dic::draw_kana(int nb_row)

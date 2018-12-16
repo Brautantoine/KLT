@@ -26,6 +26,8 @@
 #include <string>
 #include <iostream>
 #include <time.h>
+#include <ncurses.h>
+#include <cstdlib>
 
 using std::string;
 
@@ -37,6 +39,7 @@ class kana_dic
 	string get_hirag(){return hirag_tab;}
 
 	void print_tab(int row=10);
+	void print_kat(int row=10);
 	void print_kana(int index);
 	void print_romaj(int index);
 	void print_current();
@@ -50,10 +53,12 @@ class kana_dic
 
 	void init_tab();
 	void emplace_romaj_tab();
+	void emplace_katak_tab();
 
 	string hirag_tab;
+	string katak_tab;
 	std::vector<string> hirag_tab_format;
-	//string katak_tab; Not implemented yet
+	std::vector<string> katak_tab_format;
 	std::vector<string> romaj_tab;
 	int current_kana;
 

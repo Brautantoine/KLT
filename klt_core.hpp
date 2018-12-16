@@ -25,6 +25,8 @@
 #include "kana.hpp"
 #include <iostream>
 #include <unistd.h>
+#include <ncurses.h>
+#include <cstdlib>
 
 class klt_core
 {
@@ -37,11 +39,18 @@ class klt_core
 
 	void print_table();
 	void start_random_kana();
+	void nc_print_menu(WINDOW* menu_win,int highlight);
 
 	bool core;
 	int inp;
 	kana_dic dic;
 	bool invalid_choice;
+	std::vector<string> menu_string;
+
+	//ncurses attribute
+	WINDOW *menu_win;
+	int highlight;
+	int choice;
 };
 
 #endif //KLT_CORE

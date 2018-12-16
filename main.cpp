@@ -24,24 +24,48 @@
 #include <time.h>
 #include <unistd.h>
 #include "klt_core.hpp"
-//#include <ncurses.h>
+#include <ncurses.h>
+#include <locale.h>
+#include "utils.hpp"
 
-//#define NB_KANA 42
 
-int main()
+
+int main(int argc, char **argv)
 {
+	if(argc==1)
+	{
+		klt_core main_loop;
 
-	klt_core main_loop;
+		setlocale(LC_ALL, "");
+		initscr();
+		clear();
+		noecho();
+		cbreak();
+		main_loop.start_loop();
 
-	//initscr();
-	main_loop.start_loop();
+		clrtoeol();
+		refresh();
+		endwin();
+	}
+	else
+	{
+		for(int i=1;i<argc;i++)
+		{
+				switch (utils::arg_hash(argv[i]))
+				{
+					case 1:
+						utils::show_help();
+						return 0;
+						break;
+					case 2:
+						utils::show_version();
+						return 0;
+						break;
+					default:
+						std::cout << "unknwow argument : " << argv[i] << std::endl;
+				}
+		}
+	}
 
-	/*printw("je suis la fenetre ncurses ... eh oui");
-	getch();
-	clear();
-	std::cout << " et je marche avec un cout" << '\n';
-	getch();
-	clear();
-	endwin();*/
 	return 0;
 }

@@ -135,7 +135,14 @@ void klt_core::start_random_kana()
 	echo();
 	getstr(temp);
 
-	nb_row = std::stoi(temp);
+	try
+	{
+		nb_row = std::stoi(temp);
+	}
+	catch (const std::exception& e)
+	{
+		// std::cerr << "/* error message */" << '\n';
+	}
 	if(nb_row<=0 || nb_row>10)
 		nb_row=10;
 

@@ -1,6 +1,6 @@
 /****************************************************************************************
 *    KLT : A terminal tool that help you learn kana                                     *
-*    Copyright KLT (C) 2018  Antoine Braut                                              *
+*    Copyright KLT (C) 2018 -2019  Antoine Braut                                        *
 *                                                                                       *
 *    This program is free software: you can redistribute it and/or modify               *
 *    it under the terms of the GNU General Public License as published by               *
@@ -27,6 +27,7 @@
 #include <unistd.h>
 #include <ncurses.h>
 #include <cstdlib>
+#include <exception>
 
 class klt_core
 {

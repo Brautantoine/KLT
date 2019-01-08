@@ -1,6 +1,6 @@
 /****************************************************************************************
 *    KLT : A terminal tool that help you learn kana                                     *
-*    Copyright KLT (C) 2018 -2019  Antoine Braut                                        *
+*    Copyright KLT (C) 2018 - 2019  Antoine Braut                                       *
 *                                                                                       *
 *    This program is free software: you can redistribute it and/or modify               *
 *    it under the terms of the GNU General Public License as published by               *
@@ -23,6 +23,7 @@
 #define KLT_CORE
 
 #include "kana.hpp"
+#include "Kana_trainer.hpp"
 #include <iostream>
 #include <unistd.h>
 #include <ncurses.h>
@@ -39,12 +40,17 @@ class klt_core
 	private:
 
 	void print_table();
+
 	void start_random_kana();
+	void configure_random_kana();
+	void loop_random_kana();
+
 	void nc_print_menu(WINDOW* menu_win,int highlight);
 
 	bool core;
 	int inp;
 	kana_dic dic;
+	//Kana_trainer trainer;
 	bool invalid_choice;
 	std::vector<string> menu_string;
 

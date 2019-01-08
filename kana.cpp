@@ -22,7 +22,7 @@
 #include "kana.hpp"
 
 
-const int kana_dic::NB_KANA=44;
+const int kana_dic::NB_KANA=45;
 
 kana_dic::kana_dic()
 {
@@ -98,6 +98,18 @@ void kana_dic::print_tab(int row)
 
 	refresh();
 }
+void kana_dic::print_tab(int row,int offset_y)																	// surcharge avec decalage
+{
+	//int i=0;
+
+	if (row<=0 || row > hirag_tab_format.size())
+		row=hirag_tab_format.size();
+
+	for(int i=0;i<row*2;i++)
+		mvprintw(i,offset_y,"%s",hirag_tab_format.at(i).c_str());
+
+	refresh();
+}
 
 void kana_dic::print_kat(int row)
 {
@@ -108,6 +120,18 @@ void kana_dic::print_kat(int row)
 
 	for(int i=0;i<row*2;i++)
 		mvprintw(i,25,"%s",katak_tab_format.at(i).c_str());
+
+	refresh();
+}
+void kana_dic::print_kat(int row,int offset_y)																	// surcharge avec decalage
+{
+	//int i=0;
+
+	if (row<=0 || row > katak_tab_format.size())
+		row=hirag_tab_format.size();
+
+	for(int i=0;i<row*2;i++)
+		mvprintw(i,offset_y,"%s",katak_tab_format.at(i).c_str());
 
 	refresh();
 }

@@ -16,6 +16,7 @@ It have been test on :
 * Ubuntu 16.06 and 18.04
 * Mageia 6
 * Debian 9
+* RaspberryPi 3 (with cross-compiling)
 
 ## How to compile it ? ##
 
@@ -44,14 +45,19 @@ In order to run KLT just use :
 klt
 ```
 
-Some new feature will come such as :
+There is also some features such as :
 ```sh
 klt [-h,--help] # Display brief help
 klt  [-v,--version] # Display version
-klt --quick #Just draw one kana
 ```
 
 But there have not been implemented yet.
+
+## Incoming Update ##
+
+- [ ] Full support for random kana training and configure options for it [~50%]
+- [ ] Training with words [0%]
+- [ ] Good makefile and Autotools packaging [0%]
 
 ## Contact ##
 

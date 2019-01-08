@@ -19,53 +19,42 @@
 *                                                                                       *
 ****************************************************************************************/
 
-#ifndef KANA_HPP
-#define KANA_HPP
+#ifndef KANA_TRAINER_HPP
+#define KANA_TRAINER_HPP
 
-#include <vector>
-#include <string>
-#include <iostream>
-#include <time.h>
+#include "kana.hpp"
+//#include <iostream>
+#include <unistd.h>
 #include <ncurses.h>
 #include <cstdlib>
+#include <exception>
 
-using std::string;
+class Kana_trainer{
 
-class kana_dic
-{
-	public :
-	kana_dic();
-	virtual ~kana_dic();
-	string get_hirag(){return hirag_tab;}
+  public:
 
-  void print_tab(int row=10);
-	void print_tab(int row,int offset_y);
-	void print_kat(int row=10);
-	void print_kat(int row,int offset_y);
-	void print_kana(int index);
-	void print_romaj(int index);
-	void print_current();
-	void print_current_romaj();
-	bool compare_kana(string input);
-	void draw_kana(int nb_row=10);
+  Kana_trainer(kana_dic& n_dic);
+  virtual ~Kana_trainer();
 
-	static const int NB_KANA;
+  void configure_random_kana();
+	void loop_random_kana();
 
-	private :
+  private :
 
-	void init_tab();
-	void emplace_romaj_tab();
-	void emplace_katak_tab();
+  void nc_print_config();
 
-	string hirag_tab;
-	string katak_tab;
-	std::vector<string> hirag_tab_format;
-	std::vector<string> katak_tab_format;
-	std::vector<string> romaj_tab;
-	int current_kana;
+  //int inp;
+  kana_dic dic;
 
+  //configurable attribute
+  bool show_table;
+  enum{hiragana,katakana,both} kana_choice;
+  int nb_row;
+
+  //NCURSES attribute
+  WINDOW *config_win;
+  int highlight;
+  int choice;
 };
 
-
-
-#endif // KANA_HPP
+#endif // KANA_TRAINER_HPP

@@ -19,53 +19,99 @@
 *                                                                                       *
 ****************************************************************************************/
 
-#ifndef KANA_HPP
-#define KANA_HPP
+#include "Kana_trainer.hpp"
 
-#include <vector>
-#include <string>
-#include <iostream>
-#include <time.h>
-#include <ncurses.h>
-#include <cstdlib>
-
-using std::string;
-
-class kana_dic
+Kana_trainer::Kana_trainer(kana_dic& n_dic)
 {
-	public :
-	kana_dic();
-	virtual ~kana_dic();
-	string get_hirag(){return hirag_tab;}
+  dic=n_dic;
+}
 
-  void print_tab(int row=10);
-	void print_tab(int row,int offset_y);
-	void print_kat(int row=10);
-	void print_kat(int row,int offset_y);
-	void print_kana(int index);
-	void print_romaj(int index);
-	void print_current();
-	void print_current_romaj();
-	bool compare_kana(string input);
-	void draw_kana(int nb_row=10);
+Kana_trainer::~Kana_trainer()
+{
 
-	static const int NB_KANA;
+}
 
-	private :
+void Kana_trainer::configure_random_kana()
+{
+  char temp[10];
+  nb_row=10;                                                                    // Default value overide
+  /* elder */ mvprintw(0,0,"How many row do you want ? : ");
+	refresh();
 
-	void init_tab();
-	void emplace_romaj_tab();
-	void emplace_katak_tab();
+  /* passing to echo mode */
+  nocbreak();
+	echo();
+	getstr(temp);
 
-	string hirag_tab;
-	string katak_tab;
-	std::vector<string> hirag_tab_format;
-	std::vector<string> katak_tab_format;
-	std::vector<string> romaj_tab;
-	int current_kana;
+  /* Get user nb_row */
+  try
+	{
+		nb_row = std::stoi(temp);
+	}
+	catch (const std::exception& e)                                               // Try catch mechanism only to prevent crash from bad arg
+	{
+		// std::cerr << "/* error message */" << '\n';
+	}
+	if(nb_row<=0 || nb_row>10)                                                    // Saturation
+		nb_row=10;
 
-};
+  // To do : kana_choice config
+  // To do : show_table config
+}
 
+void Kana_trainer::loop_random_kana()
+{
+  bool core (TRUE);
+  char temp[10];
+  std::string input;
 
+  while(core)
+  {
+    clear();
 
-#endif // KANA_HPP
+		dic.draw_kana(nb_row);
+
+		dic.print_tab(nb_row);
+
+		mvprintw(2,25,"Wich Romaji correspond to the kana ");
+		dic.print_current();
+		printw(" : ");
+		refresh();
+
+		getstr(temp);
+		input = temp;
+
+		if(dic.compare_kana(input))
+		{
+			mvprintw(4,25,"Correct ");
+			dic.print_current();
+			printw(" -> ");
+			dic.print_current_romaj();
+			printw(" !");
+			refresh();
+		}
+		else
+		{
+			mvprintw(4,25,"Wrong  ");
+			dic.print_current();
+			printw(" -> ");
+			dic.print_current_romaj();
+			printw(" !");
+			refresh();
+		}
+
+		cbreak();
+		noecho();
+
+		mvprintw(6,25,"Continue ? (Y/N)");
+		refresh();
+
+		input = getch();
+
+		if (input == "N" || input == "n")
+			core=false;
+
+		nocbreak();
+		echo();
+  }
+}

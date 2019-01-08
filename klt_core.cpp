@@ -21,8 +21,9 @@
 
 #include "klt_core.hpp"
 
-klt_core::klt_core()
+klt_core::klt_core() //: trainer(dic)
 {
+	//trainer=Kana_trainer(dic);
 	core=true;
 	inp=0;
 	invalid_choice=false;
@@ -30,9 +31,11 @@ klt_core::klt_core()
 	menu_string = std::vector<string> ({"Welcome in Kana Learning Tool - ようこそ",
 																			"1 - Go for some random kana",
 																			"2 - Show Kana Table",
-																			"3 - Quit and come back later"});
+																			"3 - Try some words (WIP)",
+																			"4 - Quit and come back later"});
 	highlight=1;
 	choice=0;
+
 }
 
 klt_core::~klt_core()
@@ -42,7 +45,7 @@ klt_core::~klt_core()
 
 int klt_core::start_loop()
 {
-	menu_win = newwin(7,35,5,10);
+	menu_win = newwin(8,35,5,10);
 	int c;
 
 	keypad(menu_win, TRUE);
@@ -95,6 +98,9 @@ int klt_core::start_loop()
 				print_table();
 				break;
 			case 3 :
+				// todo
+				break;
+			case 4 :
 				core=false;
 				break;
 		}
@@ -122,80 +128,19 @@ void klt_core::print_table()
 
 void klt_core::start_random_kana()
 {
-	string input; 																																// String and using string declare in kana.hpp
-	char  temp[10]; 																															// buffer for ncurses input
-	int nb_row(10);
+	Kana_trainer trainer(dic);
 
 	clear();
 
-	mvprintw(0,0,"How many row do you want ? : ");
-	refresh();
+	/* Config */
+	trainer.configure_random_kana();
 
-	nocbreak();
-	echo();
-	getstr(temp);
+	/*   loop   */
+	trainer.loop_random_kana();
 
-	try
-	{
-		nb_row = std::stoi(temp);
-	}
-	catch (const std::exception& e)
-	{
-		// std::cerr << "/* error message */" << '\n';
-	}
-	if(nb_row<=0 || nb_row>10)
-		nb_row=10;
-
-	while(1)
-	{
-		clear();
-
-		dic.draw_kana(nb_row);
-
-		dic.print_tab(nb_row);
-
-		mvprintw(2,25,"Wich Romaji correspond to the kana ");
-		dic.print_current();
-		printw(" : ");
-		refresh();
-
-		getstr(temp);
-		input = temp;
-
-		if(dic.compare_kana(input))
-		{
-			mvprintw(4,25,"Correct ");
-			dic.print_current();
-			printw(" -> ");
-			dic.print_current_romaj();
-			printw(" !");
-			refresh();
-		}
-		else
-		{
-			mvprintw(4,25,"Wrong  ");
-			dic.print_current();
-			printw(" -> ");
-			dic.print_current_romaj();
-			printw(" !");
-			refresh();
-		}
-
-		cbreak();
-		noecho();
-
-		mvprintw(6,25,"Continue ? (Y/N)");
-		refresh();
-
-		input = getch();
-
-		if (input == "N" || input == "n")
-			break;																																		// Don't like it but ... currently too lazy
-
-		nocbreak();
-		echo();
-	}
-
+	/* End function clear */
+	cbreak();
+	noecho();
 	clear();
 	choice=-1;
 }

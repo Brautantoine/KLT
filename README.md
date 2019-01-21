@@ -51,9 +51,8 @@ klt [-h,--help] # Display brief help
 klt  [-v,--version] # Display version
 ```
 
-But there have not been implemented yet.
 
-## Incoming Update ##
+## Incoming Update before 1.0 release ##
 
 - [ ] Full support for random kana training and configure options for it [~50%]
 - [ ] Training with words [0%]

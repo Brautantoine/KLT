@@ -84,7 +84,7 @@ int klt_core::start_loop()
 					else
 						++highlight;
 					break;
-				case 10:
+				case 10:																																// Enter key
 					choice = highlight;
 					break;
 		}

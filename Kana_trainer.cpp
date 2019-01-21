@@ -24,6 +24,16 @@
 Kana_trainer::Kana_trainer(kana_dic& n_dic)
 {
   dic=n_dic;
+  config_win = newwin(8,35,5,10);
+  menu_string = std::vector<std::string> ({"Do you want table to be show ?",
+                                           "Yes please I'm still learning",
+                                           "No thanks I wanna practice",
+                                           "Wich kana do you want ?",
+                                           "Gimmeh Hiragana please",
+                                           "Some Katakana please",
+                                           "Both ! Both are good"
+                                           "How many row do you want ?",
+                                           "Something like : "});
 }
 
 Kana_trainer::~Kana_trainer()

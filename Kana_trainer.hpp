@@ -45,6 +45,7 @@ class Kana_trainer{
 
   //int inp;
   kana_dic dic;
+  std::vector<std::string> menu_string;
 
   //configurable attribute
   bool show_table;

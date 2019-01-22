@@ -41,14 +41,17 @@ class Kana_trainer{
 
   private :
 
-  void nc_print_config();
+  void nc_print_table_config();
+  void nc_print_kana_config();
+  void nc_print_row_config();
 
   //int inp;
   kana_dic dic;
-  std::vector<std::string> menu_string;
+  std::vector<std::string> config_string;
 
   //configurable attribute
   bool show_table;
+  int offset_question;
   enum{hiragana,katakana,both} kana_choice;
   int nb_row;
 

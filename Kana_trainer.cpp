@@ -31,7 +31,7 @@ Kana_trainer::Kana_trainer(kana_dic& n_dic)
                                            "Wich kana do you want ?",
                                            "Gimmeh Hiragana please",
                                            "Some Katakana please",
-                                           "Both ! Both are good"
+                                           "Both ! Both are good",
                                            "How many row do you want ?",
                                            "Something like : "});
 
@@ -58,18 +58,10 @@ void Kana_trainer::configure_random_kana()
 
   keypad(config_win, TRUE);
 
+  /* Display table config */
   nc_print_table_config();
   while(loop)
 	{
-		/*if(choice)
-		{
-
-
-			nc_print_table_config();
-
-			choice=0;
-		}*/
-
 
 		c = wgetch(config_win);
 
@@ -106,7 +98,55 @@ void Kana_trainer::configure_random_kana()
 
 		nc_print_table_config();
 	}
-                                                                  
+
+  loop=true;
+  wclear(config_win);
+  choice=0;
+  highlight=1;
+  /* Kana selection config */
+  nc_print_kana_config();
+  while(loop)
+	{
+
+		c = wgetch(config_win);
+
+		switch (c)
+		{
+			case KEY_UP:
+					if(highlight == 1)
+						highlight = 3;
+					else
+						--highlight;
+					break;
+				case KEY_DOWN:
+					if(highlight == 3)
+						highlight = 1;
+					else
+						++highlight;
+					break;
+				case 10:																																// Enter key
+					choice = highlight;
+					break;
+		}
+
+		switch(choice)
+		{
+			case 1 :
+				kana_choice=hiragana;
+        loop=false;
+				break;
+			case 2 :
+				kana_choice=katakana;
+        //loop=false;
+				break;
+      case 3 :
+  			kana_choice=both;
+        //loop=false;
+      	break;
+		}
+
+		nc_print_kana_config();
+	}
 
   /* elder */ mvprintw(0,0,"How many row do you want ? : ");
 	refresh();
@@ -198,6 +238,26 @@ void Kana_trainer::nc_print_table_config()
 	for (int i=1; i < 3 ;i++)
 	{
 		if (highlight == i)
+		{
+			wattron(config_win, A_REVERSE);
+			mvwprintw(config_win,y,2,"%s",config_string.at(i).c_str());
+			wattroff(config_win, A_REVERSE);
+		}
+		else
+			mvwprintw(config_win,y,2,"%s",config_string.at(i).c_str());
+		y++;
+	}
+	wrefresh(config_win);
+}
+
+void Kana_trainer::nc_print_kana_config()
+{
+  int y (3);
+	box(config_win,0,0);
+  mvwprintw(config_win,1,2,"%s",config_string.at(3).c_str());
+	for (int i=4; i < 7 ;i++)
+	{
+		if (highlight == i-3)
 		{
 			wattron(config_win, A_REVERSE);
 			mvwprintw(config_win,y,2,"%s",config_string.at(i).c_str());

@@ -92,6 +92,8 @@ int klt_core::start_loop()
 		switch(choice)
 		{
 			case 1 :
+				wclear(menu_win);
+				wrefresh(menu_win);
 				start_random_kana();
 				break;
 			case 2 :

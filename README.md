@@ -54,7 +54,7 @@ klt  [-v,--version] # Display version
 
 ## Incoming Update before 1.0 release ##
 
-- [ ] Full support for random kana training and configure options for it [65%]
+- [ ] Full support for random kana training and configure options for it [70%]
 - [ ] Training with words [0%]
 - [ ] Good makefile and Autotools packaging [0%]
 

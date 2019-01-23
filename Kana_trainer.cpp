@@ -24,7 +24,8 @@
 Kana_trainer::Kana_trainer(kana_dic& n_dic)
 {
   dic=n_dic;
-  config_win = newwin(8,35,5,10);
+  //config_win = newwin(8,35,5,10);
+  config_win = newwin(7,35,5,10);
   config_string = std::vector<std::string> ({"Do you want table to be show ?",
                                            "Yes please I'm still learning",
                                            "No thanks I wanna practice",
@@ -50,7 +51,7 @@ Kana_trainer::~Kana_trainer()
 
 void Kana_trainer::configure_random_kana()
 {
-  char temp[10];
+  //char temp[10];
   //nb_row=10;
   int c(0);
   bool loop(TRUE);
@@ -103,6 +104,8 @@ void Kana_trainer::configure_random_kana()
   wclear(config_win);
   choice=0;
   highlight=1;
+  wresize(config_win,8,35);
+
   /* Kana selection config */
   nc_print_kana_config();
   while(loop)
@@ -148,28 +151,7 @@ void Kana_trainer::configure_random_kana()
 		nc_print_kana_config();
 	}
 
-  /* elder */ mvprintw(0,0,"How many row do you want ? : ");
-	refresh();
-
-  /* passing to echo mode */
-  nocbreak();
-	echo();
-	getstr(temp);
-
-  /* Get user nb_row */
-  try
-	{
-		nb_row = std::stoi(temp);
-	}
-	catch (const std::exception& e)                                               // Try catch mechanism only to prevent crash from bad arg
-	{
-		// std::cerr << "/* error message */" << '\n';
-	}
-	if(nb_row<=0 || nb_row>10)                                                    // Saturation
-		nb_row=10;
-
-  // To do : kana_choice config
-  // To do : show_table config
+  nc_print_row_config();
 }
 
 void Kana_trainer::loop_random_kana()
@@ -268,4 +250,35 @@ void Kana_trainer::nc_print_kana_config()
 		y++;
 	}
 	wrefresh(config_win);
+}
+
+void Kana_trainer::nc_print_row_config()
+{
+  char temp[10];
+  wclear(config_win);
+  wrefresh(config_win);
+  wresize(config_win,5,35);
+  box(config_win,0,0);
+
+  mvwprintw(config_win,1,2,"%s",config_string.at(7).c_str());
+  mvwprintw(config_win,3,2,"%s",config_string.at(8).c_str());
+  wrefresh(config_win);
+
+   /* passing to echo mode */
+  nocbreak();
+	echo();
+
+	wgetstr(config_win,temp);
+
+  /* Get user nb_row */
+  try
+	{
+		nb_row = std::stoi(temp);
+	}
+	catch (const std::exception& e)                                               // Try catch mechanism only to prevent crash from bad arg
+	{
+		// std::cerr << "/* error message */" << '\n';
+	}
+	if(nb_row<=0 || nb_row>10)                                                    // Saturation
+		nb_row=10;
 }

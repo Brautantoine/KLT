@@ -23,10 +23,13 @@
 
 
 const int kana_dic::NB_KANA=45;
+const bool kana_dic::HIRAGANA=true;
+const bool kana_dic::KATAKANA=false;
 
 kana_dic::kana_dic()
 {
 	current_kana=0;
+	current_kana_type=HIRAGANA;
 	init_tab();
 	srand(time(NULL));
 }
@@ -148,8 +151,16 @@ void kana_dic::print_romaj(int index)
 
 void kana_dic::print_current()
 {
- 	for (int i = current_kana; i<current_kana+3;i++)
-		printw("%c",hirag_tab.at(i));
+	if(current_kana_type)
+	{
+		for (int i = current_kana; i<current_kana+3;i++)
+			printw("%c",hirag_tab.at(i));
+	}
+ 	else if (!current_kana_type)
+	{
+		for (int i = current_kana; i<current_kana+3;i++)
+			printw("%c",katak_tab.at(i));
+	}
 }
 
 void kana_dic::print_current_romaj()

@@ -48,8 +48,14 @@ class kana_dic
 	void print_current_romaj();
 	bool compare_kana(string input);
 	void draw_kana(int nb_row=10);
+	void draw_both_kana(int nb_row=10);
+
+	void set_kana_type(bool new_type)
+		{current_kana_type = new_type;}
 
 	static const int NB_KANA;
+	static const bool HIRAGANA;
+	static const bool KATAKANA;
 
 	private :
 
@@ -63,6 +69,7 @@ class kana_dic
 	std::vector<string> katak_tab_format;
 	std::vector<string> romaj_tab;
 	int current_kana;
+	bool current_kana_type;
 
 };
 

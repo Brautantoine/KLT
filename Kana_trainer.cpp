@@ -136,11 +136,13 @@ void Kana_trainer::configure_random_kana()
 		{
 			case 1 :
 				kana_choice=hiragana;
+        dic.set_kana_type(kana_dic::HIRAGANA);
         loop=false;
 				break;
 			case 2 :
 				kana_choice=katakana;
-        //loop=false;
+        dic.set_kana_type(kana_dic::KATAKANA);
+        loop=false;
 				break;
       case 3 :
   			kana_choice=both;
@@ -167,7 +169,20 @@ void Kana_trainer::loop_random_kana()
 		dic.draw_kana(nb_row);
 
 		if(show_table)
-      dic.print_tab(nb_row);
+    {
+      switch (kana_choice) {
+        case hiragana:
+          dic.print_tab(nb_row);
+          break;
+        case katakana:
+          dic.print_kat(nb_row,0);
+          break;
+        case both:
+          // todo
+          break;
+      }
+    }
+
 
 		mvprintw(2,25,"Wich Romaji correspond to the kana ");
 		dic.print_current();

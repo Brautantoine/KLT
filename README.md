@@ -6,7 +6,7 @@ KLT (Kana Learning Tool) is a terminal programm that will help you learn and pra
 * Practice with random kana
 
 But soon it will offer you the possibility to store and adapt your progression with different users profile. It will also offer the possibility to practice with some words.
->**IMPORTANT :** Because KLT is currently in developpment only hiragana are supported yet, Katakana will come soon
+>**IMPORTANT :** Katakana is now supported on random training mode
 
 ## Distribution ##
 
@@ -54,7 +54,7 @@ klt  [-v,--version] # Display version
 
 ## Incoming Update before 1.0 release ##
 
-- [ ] Full support for random kana training and configure options for it [70%]
+- [ ] Full support for random kana training and configure options for it [80%]
 - [ ] Training with words [0%]
 - [ ] Good makefile and Autotools packaging [0%]
 

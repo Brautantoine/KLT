@@ -1,23 +1,72 @@
-Kana_trainer.o : Kana_trainer.cpp Kana_trainer.hpp
+CXX ?= g++
 
-	g++ Kana_trainer.cpp -c -std=c++11 -o Kana_trainer.o
+# path #
+SRC_PATH = src
+BUILD_PATH = build
+BIN_PATH = $(BUILD_PATH)/bin
 
-klt_core.o : klt_core.cpp klt_core.hpp
+# executable #
+BIN_NAME = klt.out
 
-	g++ klt_core.cpp -c -std=c++11 -o klt_core.o
+# extensions #
+SRC_EXT = cpp
 
-kana.o : kana.cpp kana.hpp
+# code lists #
+# Find all source files in the source directory, sorted by
+# most recently modified
+SOURCES = $(shell find $(SRC_PATH) -name '*.$(SRC_EXT)' | sort -k 1nr | cut -f2-)
+# Set the object file names, with the source directory stripped
+# from the path, and the build path prepended in its place
+OBJECTS = $(SOURCES:$(SRC_PATH)/%.$(SRC_EXT)=$(BUILD_PATH)/%.o)
+# Set the dependency files that will be used to add header dependencies
+DEPS = $(OBJECTS:.o=.d)
 
-	g++  kana.cpp -c -std=c++11 -o kana.o
+# flags #
+COMPILE_FLAGS = -std=c++11 -Wall -Wextra -g
+INCLUDES = -I include/ -I /usr/local/include
+# Space-separated pkg-config libraries used by this project
+LIBS =-lncursesw
 
-utils.o : utils.cpp utils.hpp
+.PHONY: default_target
+default_target: release
 
-	g++  utils.cpp -c -std=c++11 -o utils.o
+.PHONY: release
+release: export CXXFLAGS := $(CXXFLAGS) $(COMPILE_FLAGS)
+release: dirs
+	@$(MAKE) all
 
-all : main.cpp kana.o klt_core.o utils.o Kana_trainer.o
+.PHONY: dirs
+dirs:
+	@echo "Creating directories"
+	@mkdir -p $(dir $(OBJECTS))
+	@mkdir -p $(BIN_PATH)
 
-	 g++ main.cpp -o klt.out Kana_trainer.o kana.o klt_core.o utils.o -std=c++11 -lncursesw
+.PHONY: clean
+clean:
+	@echo "Deleting $(BIN_NAME) symlink"
+	@$(RM) $(BIN_NAME)
+	@echo "Deleting directories"
+	@$(RM) -r $(BUILD_PATH)
+	@$(RM) -r $(BIN_PATH)
 
-install : klt.out
+# checks the executable and symlinks to the output
+.PHONY: all
+all: $(BIN_PATH)/$(BIN_NAME)
+	@echo "Making symlink: $(BIN_NAME) -> $<"
+	@$(RM) $(BIN_NAME)
+	@ln -s $(BIN_PATH)/$(BIN_NAME) $(BIN_NAME)
 
-	cp klt.out /usr/bin/klt
+# Creation of the executable
+$(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
+	@echo "Linking: $@"
+	$(CXX) $(OBJECTS) -o $@ $(LIBS)
+
+# Add dependency files, if they exist
+-include $(DEPS)
+
+# Source file rules
+# After the first compilation they will be joined with the rules from the
+# dependency files to provide header dependencies
+$(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
+	@echo "Compiling: $< -> $@"
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@

@@ -19,15 +19,16 @@ It have been test on :
 * RaspberryPi 3 (with cross-compiling)
 
 ## How to compile it ? ##
+>The project's architecture is changing, a good Autotools package will come soon
 
-KLT has not good Makefile yet. If you have g++ installed you can try the makefile with :
+If you have g++ installed you can try the makefile with :
 ```sh
-make all # invoke g++
+make # invoke g++
 ```
 
 But you'll probably need to compile it yourself. A right `Autotools`packaging will come later.
 
-> **IMPORTANT** : This branch of KLT depends of libncursesw.so (available with libncursesw5-dev package)
+> **IMPORTANT** : KLT depends of libncursesw.so (available with libncursesw5-dev package) - Dependencies section will come
 
 ## How to install it ? ##
 
@@ -56,7 +57,7 @@ klt  [-v,--version] # Display version
 
 - [ ] Full support for random kana training and configure options for it [80%]
 - [ ] Training with words [0%]
-- [ ] Good makefile and Autotools packaging [0%]
+- [ ] Good makefile and Autotools packaging [25%]
 
 ## Contact ##
 

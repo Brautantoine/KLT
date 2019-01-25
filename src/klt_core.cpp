@@ -79,7 +79,7 @@ int klt_core::start_loop()
 						--highlight;
 					break;
 				case KEY_DOWN:
-					if(highlight == menu_string.size()-1)
+					if(highlight == (int)menu_string.size()-1)
 						highlight = 1;
 					else
 						++highlight;
@@ -151,7 +151,7 @@ void klt_core::nc_print_menu(WINDOW *menu_win,int highlight)										// From th
 {																																								// http://tldp.org/HOWTO/NCURSES-Programming-HOWTO/keys.html
 	int y (2);
 	box(menu_win,0,0);
-	for (int i=0; i < menu_string.size()-1 ;i++)
+	for (int i=0; i < (int)menu_string.size()-1 ;i++)
 	{
 		if (highlight == i+1)
 		{

@@ -93,7 +93,7 @@ void kana_dic::print_tab(int row)
 {
 	//int i=0;
 
-	if (row<=0 || row > hirag_tab_format.size())
+	if (row<=0 || row > (int)hirag_tab_format.size())
 		row=hirag_tab_format.size();
 
 	for(int i=0;i<row*2;i++)
@@ -105,7 +105,7 @@ void kana_dic::print_tab(int row,int offset_y)																	// surcharge avec
 {
 	//int i=0;
 
-	if (row<=0 || row > hirag_tab_format.size())
+	if (row<=0 || row > (int)hirag_tab_format.size())
 		row=hirag_tab_format.size();
 
 	for(int i=0;i<row*2;i++)
@@ -118,7 +118,7 @@ void kana_dic::print_kat(int row)
 {
 	//int i=0;
 
-	if (row<=0 || row > katak_tab_format.size())
+	if (row<=0 || row > (int)katak_tab_format.size())
 		row=hirag_tab_format.size();
 
 	for(int i=0;i<row*2;i++)
@@ -130,7 +130,7 @@ void kana_dic::print_kat(int row,int offset_y)																	// surcharge avec
 {
 	//int i=0;
 
-	if (row<=0 || row > katak_tab_format.size())
+	if (row<=0 || row > (int)katak_tab_format.size())
 		row=hirag_tab_format.size();
 
 	for(int i=0;i<row*2;i++)
@@ -222,7 +222,7 @@ void kana_dic::emplace_romaj_tab() //
 				  									"ra","ri","ru","re","ro",
 				  									"wa",               "wo"});
 
-	for(int i=0;i<tmp.size();i++)
+	for(int i=0;i<(int)tmp.size();i++)
 		romaj_tab.emplace_back(tmp.at(i));
 }
 
@@ -249,8 +249,8 @@ void kana_dic::emplace_katak_tab()																							// WHY ARE YOU SO CORRU
 																	"ラ  リ  ル  レ  ロ\n",
 																	"wa              wo\n",
 																	"ワ              ヲ"});
-	for(int i=0;i<buff_str.size();i++)
+	for(int i=0;i<(int)buff_str.size();i++)
 		katak_tab.push_back(buff_str.at(i));
-	for(int i=0;i<buff_vect.size();i++)
+	for(int i=0;i<(int)buff_vect.size();i++)
 		katak_tab_format.emplace_back(buff_vect.at(i));
 }

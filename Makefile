@@ -4,6 +4,7 @@ CXX ?= g++
 SRC_PATH = src
 BUILD_PATH = build
 BIN_PATH = $(BUILD_PATH)/bin
+INSTALL_LOC ?= /usr/bin
 
 # executable #
 BIN_NAME = klt.out
@@ -58,8 +59,8 @@ all: $(BIN_PATH)/$(BIN_NAME)
 
 # Creation of the executable
 $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
-	@echo "Linking: $@"
-	$(CXX) $(OBJECTS) -o $@ $(LIBS)
+	@echo "	LD $@"
+	@$(CXX) $(OBJECTS) -o $@ $(LIBS)
 
 # Add dependency files, if they exist
 -include $(DEPS)
@@ -68,5 +69,9 @@ $(BIN_PATH)/$(BIN_NAME): $(OBJECTS)
 # After the first compilation they will be joined with the rules from the
 # dependency files to provide header dependencies
 $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
-	@echo "Compiling: $< -> $@"
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@
+	@echo "	CC $<"
+	@$(CXX) $(CXXFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@
+
+install : klt.out
+	@echo "Installing klt in $(INSTALL_LOC)"
+	@install -m755 -T $(BIN_NAME) $(INSTALL_LOC)

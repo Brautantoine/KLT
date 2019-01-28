@@ -1,3 +1,4 @@
+[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/Brautantoine/KLT.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Brautantoine/KLT/context:cpp)
 # What is Kana Learning Tool (Work In Progress) ? ##
 >**This software is under development, core program isn't finish yet. You can try it if you want but some features will come later**
 

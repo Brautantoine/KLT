@@ -197,6 +197,40 @@ void kana_dic::draw_kana(int nb_row)
 
 	last_kana=current_kana;
 }
+void kana_dic::draw_both_kana(int nb_row)
+{
+	static int last_kana(-1);
+	int nb_active_kana(0);
+
+	if(nb_row<=0 || nb_row>10)
+		nb_row=10;
+
+	switch(nb_row)
+	{
+		case 8 :
+			nb_active_kana=NB_KANA-7;
+			break;
+		case 9 :
+			nb_active_kana=NB_KANA-2;
+			break;
+		case 10 :
+			nb_active_kana=NB_KANA;
+			break;
+		default :
+			nb_active_kana=nb_row*5;
+	}
+
+	if(rand()%2)
+		current_kana_type=HIRAGANA;
+	else
+		current_kana_type=KATAKANA;
+
+	do {
+		current_kana=(rand()%nb_active_kana)*3;
+	} while(current_kana==last_kana);
+
+	last_kana=current_kana;
+}
 
 bool kana_dic::compare_kana(string input)
 {

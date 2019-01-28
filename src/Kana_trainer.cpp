@@ -26,7 +26,7 @@ Kana_trainer::Kana_trainer(kana_dic& n_dic)
   dic=n_dic;
   //config_win = newwin(8,35,5,10);
   config_win = newwin(7,35,5,10);
-  config_string = std::vector<std::string> ({"Do you want table to be show ?",
+  config_string = std::vector<std::string> ({"Do you want table to be shown ?",
                                            "Yes please I'm still learning",
                                            "No thanks I wanna practice",
                                            "Wich kana do you want ?",
@@ -146,7 +146,7 @@ void Kana_trainer::configure_random_kana()
 				break;
       case 3 :
   			kana_choice=both;
-        //loop=false;
+        loop=false;
       	break;
 		}
 
@@ -166,7 +166,10 @@ void Kana_trainer::loop_random_kana()
   {
     clear();
 
-		dic.draw_kana(nb_row);
+    if(kana_choice==both)
+		  dic.draw_both_kana(nb_row);
+    else
+      dic.draw_kana(nb_row);
 
 		if(show_table)
     {
@@ -178,7 +181,10 @@ void Kana_trainer::loop_random_kana()
           dic.print_kat(nb_row,0);
           break;
         case both:
-          // todo
+          if(dic.get_kana_type())
+            dic.print_tab(nb_row);
+          else
+            dic.print_kat(nb_row,0);
           break;
       }
     }

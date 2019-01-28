@@ -50,10 +50,11 @@ class kana_dic
 	void draw_kana(int nb_row=10);
 	void draw_both_kana(int nb_row=10);
 
+	bool get_kana_type(){return current_kana_type;}
 	void set_kana_type(bool new_type)
 		{current_kana_type = new_type;}
 
-	static const int NB_KANA;
+	static const int  NB_KANA;
 	static const bool HIRAGANA;
 	static const bool KATAKANA;
 

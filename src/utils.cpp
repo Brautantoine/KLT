@@ -43,7 +43,7 @@ int utils::arg_hash(std::string key)
 
 void utils::show_help()
 {
-  std::cout << "Kana Learning Tool - version 0.6.2 (beta-Makefile)\n\
+  std::cout << "Kana Learning Tool - version 0.7.0 (beta-Makefile)\n\
 A simple terminal tool using ncurses that will help you learn kana.\n\
 Run the program without any arg to launch the core program.\n\
 \n\
@@ -55,5 +55,5 @@ Run the program without any arg to launch the core program.\n\
 
 void utils::show_version()
 {
-  std::cout << "Kana Learning Tool - version 0.6.2 (beta-Makefile)\n";
+  std::cout << "Kana Learning Tool - version 0.7.0 (beta-Makefile)\n";
 }

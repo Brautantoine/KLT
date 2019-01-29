@@ -42,7 +42,6 @@ kana_dic::~kana_dic()
 void kana_dic::init_tab()
 {
   hirag_tab = string ("あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわを");
-  //katak_tab = string ("アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲ");
   emplace_romaj_tab();                                                          // We could have used list initialisation as below
   emplace_katak_tab();                                                          /// Damn deallocation I hate you
                                                                                 // but presence of 2 std::vector<string> initialised like this lead to seg fault when deallocating
@@ -66,27 +65,6 @@ void kana_dic::init_tab()
                                            "ら  り  る  れ  ろ\n",
                                            "wa              wo\n",
                                            "わ              を"});
-
-  /*katak_tab_format = std::vector<string> ({"a   i   u   e   o\n",
-                                           "あ  い  う  え  お\n",
-                                           "ka  ki  ku  ke  ko\n",
-                                           "か  き  く  け  こ\n",
-                                           "sa  shi su  se  so\n",
-                                           "さ  し  す  せ  そ\n",
-                                           "ta  chi tsu te  to\n",
-                                           "た  ち  つ  て  と\n",
-                                           "na  ni  nu  ne  no\n",
-                                           "な  に  ぬ  ね  の\n",
-                                           "ha  hi  fu  he  ho\n",
-                                           "は  ひ  ふ  へ  ほ\n",
-                                           "ma  mi  mu  me  mo\n",
-                                           "ま  み  む  め  も \n",
-                                           "ya      yu      yo\n",
-                                           "や      ゆ      よ\n",
-                                           "ra  ri  ru  re  ro\n",
-                                           "ら  り  る  れ  ろ\n",
-                                           "wa              wo\n",
-                                           "わ              を"});*/
 }
 
 void kana_dic::print_tab(int row)

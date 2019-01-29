@@ -1,4 +1,5 @@
 # What is Kana Learning Tool (Work In Progress) ? ##
+[![TravisCI](https://img.shields.io/travis/Brautantoine/KLT.svg)](https://travis-ci.org/Brautantoine/KLT)
 [![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/Brautantoine/KLT.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Brautantoine/KLT/context:cpp)
 [![GitHub license](https://img.shields.io/github/license/brautantoine/klt.svg)](https://github.com/Brautantoine/KLT/blob/master/LICENSE)
 >**This software is under development, core program isn't finish yet. You can try it if you want but some features will come later**

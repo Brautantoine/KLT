@@ -4,7 +4,7 @@ CXX ?= g++
 SRC_PATH = src
 BUILD_PATH = build
 BIN_PATH = $(BUILD_PATH)/bin
-INSTALL_LOC ?= /usr/bin
+INSTALL_LOC ?= ${HOME}
 
 # executable #
 BIN_NAME = klt.out
@@ -74,4 +74,6 @@ $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 
 install : klt.out
 	@echo "Installing klt in $(INSTALL_LOC)"
-	@install -m755 -T $(BIN_NAME) $(INSTALL_LOC)/klt
+	mkdir -p ${INSTALL_LOC}/klt
+	install -m755  $(BIN_NAME) $(INSTALL_LOC)/klt
+	

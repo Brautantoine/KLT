@@ -1,0 +1,21 @@
+{
+  "id" : 1,
+  "kana" : "さしみ",
+  "romaji" : "sashimi",
+  "level" : 7,
+  "detail" : "Piece of fish it's yumi"
+}
+{
+  "id" : 2,
+  "kana" : "さんぽ",
+  "romaji" : "sanpo",
+  "level" : 10,
+  "detail" : "A walk, a stroll"
+}
+{
+     "id": 3,
+     "kana": "ようこそ",
+     "detail": "welcome",
+     "level": 8,
+     "romaji": "youkoso"
+}

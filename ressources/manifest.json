@@ -1,0 +1,9 @@
+{
+      "file0": {
+            "name": "ressources/firstDic.json",
+            "nb_words": 3,
+            "contains" : "hiragana"
+      },
+      "nb_files": 1,
+      "version": "0.0.0"
+}

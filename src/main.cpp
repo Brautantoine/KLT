@@ -27,6 +27,8 @@
 #include <ncurses.h>
 #include <locale.h>
 #include "utils.hpp"
+#include "manifest_conteneur.hpp"
+#include "dic_conteneur.hpp"
 
 
 
@@ -59,6 +61,10 @@ int main(int argc, char **argv)
 						break;
 					case 2:
 						utils::show_version();
+						return 0;
+						break;
+					case 3:
+						utils::run_validation();
 						return 0;
 						break;
 					default:

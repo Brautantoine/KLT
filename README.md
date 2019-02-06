@@ -37,7 +37,7 @@ But you'll probably need to compile it yourself. A right `Autotools`packaging wi
 
 Currently KLT only produce a `"klt.out"` (or whatever you had name your executable). If you want you can run
 ```sh
-sudo make install # will install klt in /usr/bin
+sudo make install # will install klt ${HOME}
 ```
 
 You can also just `mv` the executable wherever you want.
@@ -51,16 +51,17 @@ klt
 
 There is also some features such as :
 ```sh
-klt [-h,--help] # Display brief help
-klt  [-v,--version] # Display version
+klt [-h,--help]    # Display brief help
+klt [-v,--version] # Display version
+klt [--validate]   # Run basic test for the json files
 ```
 
 
 ## Incoming Update before 1.0 release ##
 
 - [x] Full support for random kana training and configure options for it [100%]
-- [ ] Training with words [0%]
-- [ ] Good makefile and Autotools packaging [25%]
+- [ ] Training with words [20%]
+- [X] Good makefile [~100%]
 
 ## Contact ##
 

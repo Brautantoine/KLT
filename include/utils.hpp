@@ -27,12 +27,14 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include "manifest_conteneur.hpp"
 
 namespace utils
 {
     int arg_hash(std::string key);                                              // Adapted from stackoverflow : "Why the switch cannot be applied on strings"
     void show_help();
     void show_version();
+    void run_validation();
 }
 
 

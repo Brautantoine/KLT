@@ -30,6 +30,7 @@ int utils::arg_hash(std::string key)
        {"-h",   [&](){ result = 1; }},
        {"-v",   [&](){ result = 2; }},
        {"--version",   [&](){ result = 2; }},
+       {"--validate",   [&](){ result = 3; }},
    };
    static const auto end = m.end();
        auto it = m.find(key);
@@ -43,17 +44,27 @@ int utils::arg_hash(std::string key)
 
 void utils::show_help()
 {
-  std::cout << "Kana Learning Tool - version 0.7.0 (beta-Makefile)\n\
+  std::cout << "Kana Learning Tool - version 0.8.0 (beta-json)\n\
 A simple terminal tool using ncurses that will help you learn kana.\n\
 Run the program without any arg to launch the core program.\n\
 \n\
       Usage :   klt [Arg]\
 \n\
                 -h | --help     : show this message\n\
-                -v | --version  : show version\n\n";
+                -v | --version  : show version\n\
+                     --validate : run basic test for .json files\n\n";
 }
 
 void utils::show_version()
 {
-  std::cout << "Kana Learning Tool - version 0.7.0 (beta-Makefile)\n";
+  std::cout << "Kana Learning Tool - version 0.8.0 (beta-json)\n";
+}
+
+void utils::run_validation()
+{
+  manifest_conteneur manifest("ressources/manifest.json");
+  if (manifest.validate())
+    std::cout << "Your .json files seems good" << std::endl;
+  else
+    std::cout << "Your .json files seems to have a problem" << std::endl;
 }

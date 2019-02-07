@@ -22,23 +22,25 @@ It have been test on :
 * RaspberryPi 3 (with cross-compiling)
 
 ## How to compile it ? ##
->The project's architecture is changing, a good Autotools package will come soon
 
-If you have g++ installed you can try the makefile with :
+In order to compile the program,use the makefile.
 ```sh
 make # invoke g++
 ```
-
-But you'll probably need to compile it yourself. A right `Autotools`packaging will come later.
-
+You can use CXX=myCompiler to use a custom compiler.
 > **IMPORTANT** : KLT depends of libncursesw.so (available with libncursesw5-dev package) - Dependencies section will come
 
 ## How to install it ? ##
 
-Currently KLT only produce a `"klt.out"` (or whatever you had name your executable). If you want you can run
+In order to install you can use :
 ```sh
-sudo make install # will install klt ${HOME}
+sudo make install # will create a symlink in /usr/bin
 ```
+You can use INSTALL_LOC=your/path/of/install if you want a custom location
+
+>*IMPORTANT* : Please note that make install only create a symlink in /usr/bin. The program will look for the ressources
+folder with a relative path. If you want to install the program and the ressources in different folder you will have to
+patch the sources.
 
 You can also just `mv` the executable wherever you want.
 

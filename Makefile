@@ -4,7 +4,8 @@ CXX ?= g++
 SRC_PATH = src
 BUILD_PATH = build
 BIN_PATH = $(BUILD_PATH)/bin
-INSTALL_LOC ?= ${HOME}
+INSTALL_LOC ?= /usr/bin
+CURRENT_DIR = $(shell pwd)
 
 # executable #
 BIN_NAME = klt.out
@@ -73,7 +74,5 @@ $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 	@$(CXX) $(CXXFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@
 
 install : klt.out
-	@echo "Installing klt in $(INSTALL_LOC)"
-	mkdir -p ${INSTALL_LOC}/klt
-	install -m755  $(BIN_NAME) $(INSTALL_LOC)/klt
-	
+	@echo "Creating Symlink of ${CURRENT_DIR}/klt.out in ${INSTALL_LOC}"
+	@ln -nfs ${CURRENT_DIR}/klt.out ${INSTALL_LOC}/klt

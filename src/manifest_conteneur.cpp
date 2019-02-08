@@ -50,15 +50,19 @@ void manifest_conteneur::construct_from_manifest(std::vector<dic_conteneur>& vec
     is_loaded();
     vector_of_dic.clear();
 
+    std::string name_with_path_type;
+    if(!file_name.compare("ressources/manifest.json"))
+      name_with_path_type = "relative_name";
+    else
+      name_with_path_type = "absolute_name";
+      
     for(int k=0;k<parser["nb_files"];k++)
     {
       std::string buff("file"+std::to_string(k));
 
-      vector_of_dic.emplace_back(parser[buff]["name"],parser[buff]["nb_words"]);
+      vector_of_dic.emplace_back(parser[buff][name_with_path_type],parser[buff]["nb_words"]);
       vector_of_dic.at(k).load_from_file();
     }
-
-    std::cerr << "vect size : " << vector_of_dic.size() << std::endl;
 }
 
 inline void manifest_conteneur::is_loaded()
@@ -77,11 +81,18 @@ bool manifest_conteneur::validate()
     if(!loaded)
       throw std::runtime_error("Error while loading : "+file_name+". Maybe you can verify json syntax.\n");
     std::vector<dic_conteneur> v;
+
+    std::string name_with_path_type;
+    if(!file_name.compare("ressources/manifest.json"))
+      name_with_path_type = "relative_name";
+    else
+      name_with_path_type = "absolute_name";
+
     for(int k=0;k<parser["nb_files"];k++)
     {
       std::string buff("file"+std::to_string(k));
 
-      v.emplace_back(parser[buff]["name"],parser[buff]["nb_words"]);
+      v.emplace_back(parser[buff][name_with_path_type],parser[buff]["nb_words"]);
       v.at(k).validate();
     }
   }

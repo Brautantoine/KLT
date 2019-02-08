@@ -5,6 +5,7 @@ SRC_PATH = src
 BUILD_PATH = build
 BIN_PATH = $(BUILD_PATH)/bin
 INSTALL_LOC ?= /usr/bin
+RESSOURCES_DEST ?= /usr/share/klt
 CURRENT_DIR = $(shell pwd)
 
 # executable #
@@ -76,3 +77,5 @@ $(BUILD_PATH)/%.o: $(SRC_PATH)/%.$(SRC_EXT)
 install : klt.out
 	@echo "Creating Symlink of ${CURRENT_DIR}/klt.out in ${INSTALL_LOC}"
 	@ln -nfs ${CURRENT_DIR}/klt.out ${INSTALL_LOC}/klt
+	@mkdir -p ${RESSOURCES_DEST}
+	@install ressources/*.json -D -m664 ${RESSOURCES_DEST}

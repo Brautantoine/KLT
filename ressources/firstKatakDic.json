@@ -1,0 +1,14 @@
+{
+  "id" : 1,
+  "kana" : "パソコン",
+  "romaji" : "Pasokon",
+  "level" : 11,
+  "detail" : "Personal Computer"
+}
+{
+  "id" : 2,
+  "kana" : "スーパ",
+  "romaji" : "Suupaa",
+  "level" : 11,
+  "detail" : "Supermarket"
+}

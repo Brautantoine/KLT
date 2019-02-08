@@ -64,7 +64,7 @@ int main(int argc, char **argv)
 						return 0;
 						break;
 					case 3:
-						utils::run_validation();
+						utils::run_validation(argv);
 						return 0;
 						break;
 					default:

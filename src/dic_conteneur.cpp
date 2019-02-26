@@ -91,3 +91,34 @@ void dic_conteneur::validate()
     throw std::runtime_error("Error while loading :"+file_name+". Maybe you can verify json syntax.\n");
   //validating=false uneccessary because this object will be destroyed at the end of this scope
 }
+
+void dic_conteneur::draw_random_word()
+{
+  static int last_word(-1);
+  int nb_word(id.size());
+
+  do {
+    current_word=rand()%nb_word;
+  } while(current_word==last_word);
+
+  last_word=current_word;
+}
+
+std::string dic_conteneur::get_current()
+{
+  return kana.at(current_word);
+}
+
+std::string dic_conteneur::get_current_romaj()
+{
+  return romaji.at(current_word);
+}
+
+bool dic_conteneur::compare_word(std::string input)
+{
+  std::transform(input.begin(), input.end(), input.begin(), ::tolower);
+  if(romaji.at(current_word).compare(input))
+    return false;
+  else
+    return true;
+}

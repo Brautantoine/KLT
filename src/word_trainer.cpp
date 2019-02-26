@@ -19,58 +19,74 @@
 *                                                                                       *
 ****************************************************************************************/
 
-#include "utils.hpp"
+#include "word_trainer.hpp"
 
-
-int utils::arg_hash(std::string key)
+word_trainer::word_trainer(dic_conteneur& n_dic) : dic(n_dic)
 {
-   int result;
-   static const std::unordered_map<std::string,std::function<void()>> m{
-       {"--help",   [&](){ result = 1; }},
-       {"-h",   [&](){ result = 1; }},
-       {"-v",   [&](){ result = 2; }},
-       {"--version",   [&](){ result = 2; }},
-       {"--validate",   [&](){ result = 3; }},
-   };
-   static const auto end = m.end();
-       auto it = m.find(key);
-       if (it != end) {
-           it->second();
-       } else {
-           result = -1;
-       }
-       return result;
+
 }
 
-void utils::show_help()
+word_trainer::~word_trainer()
 {
-  std::cout << "Kana Learning Tool - version 0.9.0 (beta-json)\n\
-A simple terminal tool using ncurses that will help you learn kana.\n\
-Run the program without any arg to launch the core program.\n\
-\n\
-      Usage :   klt [Arg]\
-\n\
-                -h | --help     : show this message\n\
-                -v | --version  : show version\n\
-                     --validate : run basic test for .json files\n\n";
+
 }
 
-void utils::show_version()
+void word_trainer::configure_random_word()
 {
-  std::cout << "Kana Learning Tool - version 0.9.0 (beta-json)\n";
+
 }
 
-void utils::run_validation(char **argv)
+void word_trainer::loop_random_word()
 {
-  std::string buff;
-  if (!strcmp(argv[0],"./klt.out"))
-   buff="ressources/manifest.json";
-  else
-    buff="/usr/share/klt/manifest.json";
+  nocbreak();
+  echo();
 
-  manifest_conteneur manifest(buff);
-  if (manifest.validate())
-    std::cout << "Your .json files seems good" << std::endl;
-  else
-    std::cout << "Your .json files seems to have a problem" << std::endl;
+  bool core (TRUE);
+  char temp[10];
+  std::string input;
+
+  while(core)
+  {
+    clear();
+    dic.draw_random_word();
+    mvprintw(2,25,"What is the translation of : ");
+    printw("%s : ",dic.get_current().c_str());
+    refresh();
+
+    getstr(temp);
+		input = temp;
+
+    if(dic.compare_word(input))
+		{
+			mvprintw(4,25,"Correct ");
+			printw("%s ",dic.get_current().c_str());
+			printw(" -> ");
+      printw("%s ",dic.get_current_romaj().c_str());
+			printw(" !");
+			refresh();
+		}
+		else
+		{
+			mvprintw(4,25,"Wrong  ");
+			printw("%s ",dic.get_current().c_str());
+			printw(" -> ");
+			printw("%s ",dic.get_current_romaj().c_str());
+			printw(" !");
+			refresh();
+		}
+
+		cbreak();
+		noecho();
+
+		mvprintw(6,25,"Continue ? (Y/N)");
+		refresh();
+
+		input = getch();
+
+		if (input == "N" || input == "n")
+			core=false;
+
+		nocbreak();
+		echo();
+  }
 }

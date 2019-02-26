@@ -100,7 +100,10 @@ int klt_core::start_loop()
 				print_table();
 				break;
 			case 3 :
-				// todo
+				// start_random_word();
+				wclear(menu_win);
+				wrefresh(menu_win);
+				start_random_word();
 				break;
 			case 4 :
 				core=false;
@@ -139,6 +142,31 @@ void klt_core::start_random_kana()
 
 	/*   loop   */
 	trainer.loop_random_kana();
+
+	/* End function clear */
+	cbreak();
+	noecho();
+	clear();
+	choice=-1;
+}
+
+void klt_core::start_random_word()
+{
+	manifest_conteneur manifest("ressources/manifest.json");
+	manifest.load_from_file();
+
+	std::vector<dic_conteneur> les_dicos;
+
+	manifest.construct_from_manifest(les_dicos);
+
+	word_trainer trainer(les_dicos.at(0));
+	clear();
+
+	/* Config */
+	//trainer.configure_random_kana();
+
+	/*   loop   */
+	trainer.loop_random_word();
 
 	/* End function clear */
 	cbreak();

@@ -19,58 +19,48 @@
 *                                                                                       *
 ****************************************************************************************/
 
-#include "utils.hpp"
+#ifndef WORD_TRAINER_HPP
+#define WORD_TRAINER_HPP
 
+//#include "kana.hpp"
+//#include <iostream>
+#include "dic_conteneur.hpp"
+#include "manifest_conteneur.hpp"
+#include <unistd.h>
+#include <ncurses.h>
+#include <cstdlib>
+#include <exception>
 
-int utils::arg_hash(std::string key)
-{
-   int result;
-   static const std::unordered_map<std::string,std::function<void()>> m{
-       {"--help",   [&](){ result = 1; }},
-       {"-h",   [&](){ result = 1; }},
-       {"-v",   [&](){ result = 2; }},
-       {"--version",   [&](){ result = 2; }},
-       {"--validate",   [&](){ result = 3; }},
-   };
-   static const auto end = m.end();
-       auto it = m.find(key);
-       if (it != end) {
-           it->second();
-       } else {
-           result = -1;
-       }
-       return result;
-}
+class word_trainer{
 
-void utils::show_help()
-{
-  std::cout << "Kana Learning Tool - version 0.9.0 (beta-json)\n\
-A simple terminal tool using ncurses that will help you learn kana.\n\
-Run the program without any arg to launch the core program.\n\
-\n\
-      Usage :   klt [Arg]\
-\n\
-                -h | --help     : show this message\n\
-                -v | --version  : show version\n\
-                     --validate : run basic test for .json files\n\n";
-}
+  public:
 
-void utils::show_version()
-{
-  std::cout << "Kana Learning Tool - version 0.9.0 (beta-json)\n";
-}
+  word_trainer(dic_conteneur& n_dic);
+  virtual ~word_trainer();
 
-void utils::run_validation(char **argv)
-{
-  std::string buff;
-  if (!strcmp(argv[0],"./klt.out"))
-   buff="ressources/manifest.json";
-  else
-    buff="/usr/share/klt/manifest.json";
+  void configure_random_word();
+	void loop_random_word();
 
-  manifest_conteneur manifest(buff);
-  if (manifest.validate())
-    std::cout << "Your .json files seems good" << std::endl;
-  else
-    std::cout << "Your .json files seems to have a problem" << std::endl;
-}
+  private :
+
+  /*void nc_print_table_config();
+  void nc_print_kana_config();
+  void nc_print_row_config();*/
+
+  //void nc_print_dic_config();
+
+  //int inp;
+  //kana_dic dic;
+  dic_conteneur dic;
+  std::vector<std::string> config_string;
+
+  //configurable attribute
+  enum{hiragana,katakana,both} kana_choice;
+
+  //NCURSES attribute
+  WINDOW *config_win;
+  int highlight;
+  int choice;
+};
+
+#endif // WORD_TRAINER_HPP

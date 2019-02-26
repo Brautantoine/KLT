@@ -24,6 +24,9 @@
 
 #include "kana.hpp"
 #include "Kana_trainer.hpp"
+#include "dic_conteneur.hpp"
+#include "manifest_conteneur.hpp"
+#include "word_trainer.hpp"
 #include <iostream>
 #include <unistd.h>
 #include <ncurses.h>
@@ -42,8 +45,9 @@ class klt_core
 	void print_table();
 
 	void start_random_kana();
-	void configure_random_kana();
-	void loop_random_kana();
+	void start_random_word();
+	//void configure_random_kana();
+	//void loop_random_kana();
 
 	void nc_print_menu(WINDOW* menu_win,int highlight);
 

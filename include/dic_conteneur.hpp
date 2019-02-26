@@ -6,6 +6,7 @@
 #include "json_conteneur.hpp"
 #include <vector>
 #include <string>
+#include <algorithm>
 #include "json.hpp"
 
 
@@ -19,6 +20,11 @@ class dic_conteneur : public json_conteneur
      void load_from_file();
      void validate();
      void display(); //debug
+
+     void draw_random_word();
+     std::string get_current();
+     std::string get_current_romaj();
+     bool compare_word(std::string input);
 
      static int nb_dic;
 
@@ -35,6 +41,7 @@ class dic_conteneur : public json_conteneur
    private:
      inline void is_loaded();
 
+     int current_word;
      bool loaded;
      bool validating;
 

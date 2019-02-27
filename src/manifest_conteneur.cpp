@@ -1,3 +1,24 @@
+/****************************************************************************************
+*    KLT : A terminal tool that help you learn kana                                     *
+*    Copyright KLT (C) 2018 - 2019 Antoine Braut                                        *
+*                                                                                       *
+*    This program is free software: you can redistribute it and/or modify               *
+*    it under the terms of the GNU General Public License as published by               *
+*    the Free Software Foundation, either version 3 of the License, or                  *
+*    (at your option) any later version.                                                *
+*                                                                                       *
+*    This program is distributed in the hope that it will be useful,                    *
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of                     *
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                      *
+*    GNU General Public License for more details.                                       *
+*                                                                                       *
+*    You should have received a copy of the GNU General Public License                  *
+*    along with this program. If not, see <https://www.gnu.org/licenses/>.              *
+*                                                                                       *
+*    Contact : Antoine.braut@gmail.com                                                  *
+*                                                                                       *
+****************************************************************************************/
+
 #include "manifest_conteneur.hpp"
 
 manifest_conteneur::manifest_conteneur(std::string n_file)
@@ -23,7 +44,17 @@ void manifest_conteneur::load_from_file()
       throw std::runtime_error("Error while opening "+file_name+" : No such file or directory\n");
     file >> parser;
     if(validating)
+    {
       std::cout << "Manifest loaded" << std::endl;
+      std::cout << "\nEntries founded :" << std::endl;
+      for(int i = 0;i<parser["nb_files"];i++)
+      {
+        std::string buff("file"+std::to_string(i));
+        std::cout <<"\t" << parser[buff]["name"] << std::endl;
+      }
+      std::cout << std::endl;
+    }
+
     loaded=true;
     file.close();
   }
@@ -55,7 +86,7 @@ void manifest_conteneur::construct_from_manifest(std::vector<dic_conteneur>& vec
       name_with_path_type = "relative_name";
     else
       name_with_path_type = "absolute_name";
-      
+
     for(int k=0;k<parser["nb_files"];k++)
     {
       std::string buff("file"+std::to_string(k));
@@ -79,7 +110,7 @@ bool manifest_conteneur::validate()
   {
     load_from_file();
     if(!loaded)
-      throw std::runtime_error("Error while loading : "+file_name+". Maybe you can verify json syntax.\n");
+      throw std::runtime_error("Error while loading : "+file_name+". Maybe you can verify your json syntax.\n");
     std::vector<dic_conteneur> v;
 
     std::string name_with_path_type;
@@ -103,4 +134,15 @@ bool manifest_conteneur::validate()
   }
   validating=false;
   return ret;
+}
+
+std::vector<std::string> manifest_conteneur::get_names()
+{
+  std::vector <std::string> dic_buffer;
+  for(int i = 0;i<parser["nb_files"];i++)
+  {
+    std::string buff("file"+std::to_string(i));
+    dic_buffer.emplace_back(parser[buff]["name"]);
+  }
+  return dic_buffer;
 }

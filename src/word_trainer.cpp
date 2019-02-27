@@ -21,9 +21,12 @@
 
 #include "word_trainer.hpp"
 
-word_trainer::word_trainer(dic_conteneur& n_dic) : dic(n_dic)
+word_trainer::word_trainer(std::vector<dic_conteneur>& n_vdic) : vdic(n_vdic), dic(vdic.at(0))
 {
-
+  //dic=vdic.at(1);
+  config_win = newwin(10,50,5,10);
+  highlight=0;
+  offset=0;
 }
 
 word_trainer::~word_trainer()
@@ -31,9 +34,61 @@ word_trainer::~word_trainer()
 
 }
 
-void word_trainer::configure_random_word()
+void word_trainer::configure_random_word(manifest_conteneur& manifest)
 {
+  std::vector <std::string> dic_buffer;
+  int c(0);
+  bool loop(TRUE);
+  choice=0;
 
+  dic_buffer = manifest.get_names();
+
+  keypad(config_win, TRUE);
+
+  nc_print_dic_config(dic_buffer);
+
+  while(loop)
+	{
+
+		c = wgetch(config_win);
+
+		switch (c)
+		{
+			case KEY_UP:
+					if(highlight+offset != 0)
+          {
+						//highlight = dic_buffer.size()-1;
+
+            if(offset != 0)
+              offset--;
+            else
+              highlight--;
+          }
+					/*else
+						--highlight;*/
+					break;
+				case KEY_DOWN:
+					if(highlight+offset != dic_buffer.size()-1)
+						//highlight = 0;
+          {
+            if(highlight<4)
+            {
+              highlight++;
+            }
+            else
+              offset++;
+          }
+					/*else
+						++highlight;*/
+					break;
+				case 10:																																// Enter key
+          dic=vdic.at(highlight+offset);
+          loop=false;
+					break;
+		}
+    wclear(config_win);
+		nc_print_dic_config(dic_buffer);
+	}
 }
 
 void word_trainer::loop_random_word()
@@ -89,4 +144,27 @@ void word_trainer::loop_random_word()
 		nocbreak();
 		echo();
   }
+}
+
+void word_trainer::nc_print_dic_config(std::vector<std::string>& dic_buffer)
+{
+  int y (3);
+  int nbY = dic_buffer.size();
+  if(nbY>5)
+    nbY=5;
+  mvwprintw(config_win,1,2,"Wich of these dictionnary do you want to use ?");
+	box(config_win,0,0);
+	for (int i=offset; i < nbY+offset ;i++)
+	{
+		if (highlight == i-offset)
+		{
+			wattron(config_win, A_REVERSE);
+			mvwprintw(config_win,y,2,"%s",dic_buffer.at(i).c_str());
+			wattroff(config_win, A_REVERSE);
+		}
+		else
+			mvwprintw(config_win,y,2,"%s",dic_buffer.at(i).c_str());
+		y++;
+	}
+	wrefresh(config_win);
 }

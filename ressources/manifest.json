@@ -2,12 +2,14 @@
       "file0": {
             "relative_name": "ressources/firstHiragDic.json",
             "absolute_name": "/usr/share/klt/firstHiragDic.json",
-            "nb_words": 3,
+            "name": "firstHiragDic.json",
+            "nb_words": 7,
             "contains" : "hiragana"
       },
       "file1": {
             "relative_name": "ressources/firstKatakDic.json",
             "absolute_name": "/usr/share/klt/firstKatakDic.json",
+            "name" : "fisrtKatakDic.json",
             "nb_words": 2,
             "contains": "katakana"
       },

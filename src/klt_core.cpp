@@ -159,11 +159,11 @@ void klt_core::start_random_word()
 
 	manifest.construct_from_manifest(les_dicos);
 
-	word_trainer trainer(les_dicos.at(0));
+	word_trainer trainer(les_dicos);
 	clear();
 
 	/* Config */
-	//trainer.configure_random_kana();
+	trainer.configure_random_word(manifest);
 
 	/*   loop   */
 	trainer.loop_random_word();

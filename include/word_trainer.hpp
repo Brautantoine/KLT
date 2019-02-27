@@ -35,10 +35,10 @@ class word_trainer{
 
   public:
 
-  word_trainer(dic_conteneur& n_dic);
+  word_trainer(std::vector<dic_conteneur>& n_vdic);
   virtual ~word_trainer();
 
-  void configure_random_word();
+  void configure_random_word(manifest_conteneur& manifest);
 	void loop_random_word();
 
   private :
@@ -47,10 +47,11 @@ class word_trainer{
   void nc_print_kana_config();
   void nc_print_row_config();*/
 
-  //void nc_print_dic_config();
+  void nc_print_dic_config(std::vector<std::string>& dic_buffer);
 
   //int inp;
   //kana_dic dic;
+  std::vector<dic_conteneur>& vdic;
   dic_conteneur dic;
   std::vector<std::string> config_string;
 
@@ -61,6 +62,7 @@ class word_trainer{
   WINDOW *config_win;
   int highlight;
   int choice;
+  int offset;
 };
 
 #endif // WORD_TRAINER_HPP

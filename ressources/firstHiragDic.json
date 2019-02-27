@@ -19,3 +19,31 @@
      "level": 8,
      "romaji": "youkoso"
 }
+{
+  "id" : 4,
+  "kana" : "わたし",
+  "romaji" : "watashi",
+  "level" : 10,
+  "detail" : "I (formal for males, normal for females)"
+}
+{
+     "id": 5,
+     "kana": "ぼく",
+     "detail": "I (normal for males)",
+     "level": 11,
+     "romaji": "boku"
+}
+{
+  "id" : 6,
+  "kana" : "ねこ",
+  "romaji" : "neko",
+  "level" : 7,
+  "detail" : "cat"
+}
+{
+  "id" : 7,
+  "kana" : "いぬ",
+  "romaji" : "inu",
+  "level" : 7,
+  "detail" : "dog"
+}

@@ -49,6 +49,7 @@ class dic_conteneur : public json_conteneur
      void draw_random_word();
      std::string get_current();
      std::string get_current_romaj();
+     std::string get_current_detail();
      bool compare_word(std::string input);
 
      static int nb_dic;

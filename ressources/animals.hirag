@@ -1,0 +1,50 @@
+{"id" : 1,"kana" : "ねこ","romaji" : "neko","level" : 7,"detail" : "chat"}
+{
+  "id" : 2,
+  "kana" : "いぬ",
+  "romaji" : "inu",
+  "level" : 7,
+  "detail" : "chien"
+}
+{
+  "id" : 3,
+  "kana" : "とり",
+  "romaji" : "tori",
+  "level" : 7,
+  "detail" : "oiseau"
+}
+{
+  "id" : 4,
+  "kana" : "うし",
+  "romaji" : "ushi",
+  "level" : 7,
+  "detail" : "vache"
+}
+{
+  "id" : 5,
+  "kana" : "ねずみ",
+  "romaji" : "nezumi",
+  "level" : 7,
+  "detail" : "souris"
+}
+{
+  "id" : 6,
+  "kana" : "やぎ",
+  "romaji" : "yagi",
+  "level" : 7,
+  "detail" : "chevre"
+}
+{
+  "id" : 7,
+  "kana" : "どうぶつ",
+  "romaji" : "dobutsu",
+  "level" : 7,
+  "detail" : "animaux"
+}
+{
+  "id" : 8,
+  "kana" : "うさぎ",
+  "romaji" : "usagi",
+  "level" : 7,
+  "detail" : "lapin"
+}

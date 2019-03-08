@@ -20,15 +20,15 @@
 ****************************************************************************************/
 
 #include <iostream>
-#include "kana.hpp"
+//#include "kana.hpp"
 #include <time.h>
 #include <unistd.h>
 #include "klt_core.hpp"
 #include <ncurses.h>
 #include <locale.h>
 #include "utils.hpp"
-#include "manifest_conteneur.hpp"
-#include "dic_conteneur.hpp"
+//#include "manifest_conteneur.hpp"
+//#include "dic_conteneur.hpp"
 
 
 
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 		clear();
 		noecho();
 		cbreak();
-		main_loop.start_loop();
+		main_loop.start_loop(argv);
 
 		clrtoeol();
 		refresh();

@@ -13,6 +13,13 @@
             "nb_words": 2,
             "contains": "katakana"
       },
-      "nb_files": 2,
+      "file2": {
+            "relative_name": "ressources/animals.hirag",
+            "absolute_name": "/usr/share/klt/animals.hirag",
+            "name" : "animeaux",
+            "nb_words": 8,
+            "contains": "hiragana"
+      },
+      "nb_files": 3,
       "version": "0.0.0"
 }

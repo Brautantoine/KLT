@@ -155,6 +155,11 @@ std::string dic_conteneur::get_current_romaj()
   return romaji.at(current_word);
 }
 
+std::string dic_conteneur::get_current_detail()
+{
+  return detail.at(current_word);
+}
+
 bool dic_conteneur::compare_word(std::string input)
 {
   std::transform(input.begin(), input.end(), input.begin(), ::tolower);

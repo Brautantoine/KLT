@@ -9,7 +9,7 @@ KLT (Kana Learning Tool) is a terminal programm that will help you learn and pra
 * Practice with random kana
 
 But soon it will offer you the possibility to store and adapt your progression with different users profile. It will also offer the possibility to practice with some words.
->**IMPORTANT :** Katakana is now supported on random training mode
+>**IMPORTANT :** Katakana is now supported random training mode
 
 ## Distribution ##
 
@@ -39,7 +39,7 @@ sudo make install # will create a symlink in /usr/bin
 You can use INSTALL_LOC=your/path/of/install if you want a custom location
 
 >*IMPORTANT* : Please note that make install only create a symlink in /usr/bin. The program will look for the ressources
-folder with a relative path. If you want to install the program and the ressources in different folder you will have to
+folder with /usr/share/klt path. If you want to install the program and the ressources in different folder you will have to
 patch the sources.
 
 You can also just `mv` the executable wherever you want.
@@ -62,7 +62,7 @@ klt [--validate]   # Run basic test for the json files
 ## Incoming Update before 1.0 release ##
 
 - [x] Full support for random kana training and configure options for it [100%]
-- [ ] Training with words [20%]
+- [ ] Training with words [60%]
 - [X] Good makefile [~100%]
 
 ## Contact ##

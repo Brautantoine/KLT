@@ -68,7 +68,7 @@ void word_trainer::configure_random_word(manifest_conteneur& manifest)
 						--highlight;*/
 					break;
 				case KEY_DOWN:
-					if(highlight+offset != dic_buffer.size()-1)
+					if((unsigned int)(highlight+offset) != dic_buffer.size()-1)
 						//highlight = 0;
           {
             if(highlight<4)
@@ -104,7 +104,7 @@ void word_trainer::loop_random_word()
   {
     clear();
     dic.draw_random_word();
-    mvprintw(2,25,"What is the translation of : ");
+    mvprintw(2,5,"What is the translation of : ");
     printw("%s : ",dic.get_current().c_str());
     refresh();
 
@@ -113,7 +113,7 @@ void word_trainer::loop_random_word()
 
     if(dic.compare_word(input))
 		{
-			mvprintw(4,25,"Correct ");
+			mvprintw(4,5,"Correct ");
 			printw("%s ",dic.get_current().c_str());
 			printw(" -> ");
       printw("%s ",dic.get_current_romaj().c_str());
@@ -122,7 +122,7 @@ void word_trainer::loop_random_word()
 		}
 		else
 		{
-			mvprintw(4,25,"Wrong  ");
+			mvprintw(4,5,"Wrong  ");
 			printw("%s ",dic.get_current().c_str());
 			printw(" -> ");
 			printw("%s ",dic.get_current_romaj().c_str());
@@ -130,10 +130,12 @@ void word_trainer::loop_random_word()
 			refresh();
 		}
 
+    mvprintw(10,0,"Detail : %s",dic.get_current_detail().c_str());
+    
 		cbreak();
 		noecho();
 
-		mvprintw(6,25,"Continue ? (Y/N)");
+		mvprintw(6,5,"Continue ? (Y/N)");
 		refresh();
 
 		input = getch();

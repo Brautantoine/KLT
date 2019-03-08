@@ -78,4 +78,4 @@ install : klt.out
 	@echo "Creating Symlink of ${CURRENT_DIR}/klt.out in ${INSTALL_LOC}"
 	@ln -nfs ${CURRENT_DIR}/klt.out ${INSTALL_LOC}/klt
 	@mkdir -p ${RESSOURCES_DEST}
-	@install ressources/*.json -D -m664 ${RESSOURCES_DEST}
+	@install ressources/* -D -m664 ${RESSOURCES_DEST}

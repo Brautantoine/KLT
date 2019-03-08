@@ -38,14 +38,14 @@ class klt_core
 	public:
 	klt_core();
 	~klt_core();
-	int start_loop();
+	int start_loop(char** argv);
 
 	private:
 
 	void print_table();
 
 	void start_random_kana();
-	void start_random_word();
+	void start_random_word(char** argv);
 	//void configure_random_kana();
 	//void loop_random_kana();
 

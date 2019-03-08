@@ -43,7 +43,7 @@ klt_core::~klt_core()
 
 }
 
-int klt_core::start_loop()
+int klt_core::start_loop(char** argv)
 {
 	menu_win = newwin(8,35,5,10);
 	int c;
@@ -103,7 +103,7 @@ int klt_core::start_loop()
 				// start_random_word();
 				wclear(menu_win);
 				wrefresh(menu_win);
-				start_random_word();
+				start_random_word(argv);
 				break;
 			case 4 :
 				core=false;
@@ -150,9 +150,14 @@ void klt_core::start_random_kana()
 	choice=-1;
 }
 
-void klt_core::start_random_word()
+void klt_core::start_random_word(char** argv)
 {
-	manifest_conteneur manifest("ressources/manifest.json");
+	std::string buff;
+  if (!strcmp(argv[0],"./klt.out"))
+   buff="ressources/manifest.json";
+  else
+    buff="/usr/share/klt/manifest.json";
+	manifest_conteneur manifest(buff);
 	manifest.load_from_file();
 
 	std::vector<dic_conteneur> les_dicos;

@@ -20,6 +20,13 @@
             "nb_words": 8,
             "contains": "hiragana"
       },
-      "nb_files": 3,
+      "file3": {
+        "relative_name": "ressources/greetings.fr",
+        "absolute_name": "/usr/share/klt/greetings.fr",
+        "name" : "Salutations",
+        "nb_words": 2,
+        "contains": "hiragana"
+      },
+      "nb_files": 4,
       "version": "0.0.0"
 }

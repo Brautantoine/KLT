@@ -1,0 +1,14 @@
+{
+  "id" : 1,
+  "kana" : "おはよう",
+  "romaji" : "ohayo",
+  "level" : 11,
+  "detail" : "Bonjour (le matin)\nExample : おはようございます。-> Ohayô gozaimasu."
+}
+{
+  "id" : 1,
+  "kana" : "こんにちは",
+  "romaji" : "Konnichiwa",
+  "level" : 11,
+  "detail" : "Bonjour (la journée)"
+}
